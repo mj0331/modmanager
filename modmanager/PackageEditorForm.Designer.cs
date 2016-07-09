@@ -45,6 +45,9 @@
             this.new_mod_button = new System.Windows.Forms.Button();
             this.edit_mod_button = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.savePackageExistingManifestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +67,8 @@
             this.newPackageToolStripMenuItem,
             this.loadPackageToolStripMenuItem,
             this.toolStripSeparator1,
-            this.savePackageToolStripMenuItem});
+            this.savePackageToolStripMenuItem,
+            this.savePackageExistingManifestToolStripMenuItem});
             this.openPackageToolStripMenuItem.Name = "openPackageToolStripMenuItem";
             this.openPackageToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.openPackageToolStripMenuItem.Text = "File";
@@ -72,25 +76,26 @@
             // newPackageToolStripMenuItem
             // 
             this.newPackageToolStripMenuItem.Name = "newPackageToolStripMenuItem";
-            this.newPackageToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.newPackageToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
             this.newPackageToolStripMenuItem.Text = "New Package";
             // 
             // loadPackageToolStripMenuItem
             // 
             this.loadPackageToolStripMenuItem.Name = "loadPackageToolStripMenuItem";
-            this.loadPackageToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.loadPackageToolStripMenuItem.Text = "Open Package";
+            this.loadPackageToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.loadPackageToolStripMenuItem.Text = "Open Package From Manifest";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(242, 6);
             // 
             // savePackageToolStripMenuItem
             // 
             this.savePackageToolStripMenuItem.Name = "savePackageToolStripMenuItem";
-            this.savePackageToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.savePackageToolStripMenuItem.Text = "Save Package";
+            this.savePackageToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.savePackageToolStripMenuItem.Text = "Save Package (New Manifest)";
+            this.savePackageToolStripMenuItem.Click += new System.EventHandler(this.savePackageToolStripMenuItem_Click);
             // 
             // name_label
             // 
@@ -205,6 +210,12 @@
             this.button1.Text = "Delete";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // savePackageExistingManifestToolStripMenuItem
+            // 
+            this.savePackageExistingManifestToolStripMenuItem.Name = "savePackageExistingManifestToolStripMenuItem";
+            this.savePackageExistingManifestToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.savePackageExistingManifestToolStripMenuItem.Text = "Save Package (Existing Manifest)";
+            // 
             // PackageEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,5 +264,8 @@
         private System.Windows.Forms.Button new_mod_button;
         private System.Windows.Forms.Button edit_mod_button;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem savePackageExistingManifestToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

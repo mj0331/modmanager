@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace modmanager
 {
@@ -23,6 +25,13 @@ namespace modmanager
 
 			ModCount = 0;
 			Mods = new Mod[ModCount];
+		}
+
+		public void WriteJSON(string file_path)
+		{
+			string package_json = JsonConvert.SerializeObject(this, Formatting.Indented);
+
+			File.WriteAllText(file_path, package_json);
 		}
 
 		public void Install(Profile p)
