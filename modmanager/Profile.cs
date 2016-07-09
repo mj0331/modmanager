@@ -7,28 +7,28 @@ namespace modmanager
 	public class Profile
 	{
 		const int LatestFileFormatVersion = 1;
-        const int MaxPackageCount = 64000;
-        const int PackageArraySizeIncrease = 8;
+		const int MaxPackageCount = 64000;
+		const int PackageArraySizeIncrease = 8;
 
 		public string GameName;
 		public string GamePath;
 		public string BackupRoot;
 		public int FileFormatVersion;
 
-        public int PackageCount;
-        public ModPackage[] Packages;
+		public int PackageCount;
+		public ModPackage[] Packages;
 
-        public Profile(string game_name, string game_path, string backup_root, int ff_version = Profile.LatestFileFormatVersion)
-        {
-            GameName = game_name;
-            GamePath = game_path;
-            BackupRoot = backup_root;
-            FileFormatVersion = ff_version;
+		public Profile(string game_name, string game_path, string backup_root, int ff_version = Profile.LatestFileFormatVersion)
+		{
+			GameName = game_name;
+			GamePath = game_path;
+			BackupRoot = backup_root;
+			FileFormatVersion = ff_version;
 
-            PackageCount = 0;
-            Packages = new ModPackage[PackageCount];
-            
-        }
+			PackageCount = 0;
+			Packages = new ModPackage[PackageCount];
+			
+		}
 
 		public string GetBackupRoot()
 		{
@@ -65,30 +65,30 @@ namespace modmanager
 			return about;
 		}
 
-        public void AddPackage(ModPackage pack)
-        {
-            if(PackageCount >= Packages.Length)
-            {
-                Array.Resize<ModPackage>(ref Packages, Packages.Length + PackageArraySizeIncrease);
-            }
+		public void AddPackage(ModPackage pack)
+		{
+			if(PackageCount >= Packages.Length)
+			{
+				Array.Resize<ModPackage>(ref Packages, Packages.Length + PackageArraySizeIncrease);
+			}
 
-            Packages[PackageCount] = pack;
-            PackageCount++;
+			Packages[PackageCount] = pack;
+			PackageCount++;
 
-        }
+		}
 
-        public ModPackage Search(string name)
-        {
-            for(int i = 0; i < PackageCount; i++)
-            {
-                if(Packages[i].Name == name)
-                {
-                    return Packages[i];
-                }
-            }
+		public ModPackage Search(string name)
+		{
+			for(int i = 0; i < PackageCount; i++)
+			{
+				if(Packages[i].Name == name)
+				{
+					return Packages[i];
+				}
+			}
 
-            return new ModPackage("", "", "");
-        }
+			return new ModPackage("", "", "");
+		}
 	}
 }
 

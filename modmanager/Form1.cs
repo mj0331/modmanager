@@ -7,6 +7,7 @@ namespace modmanager
     public partial class Form1 : Form
     {
         private Profile ActiveProfile;
+        private ModPackage SelectedPackage;
 
         public Form1()
         {
@@ -92,14 +93,18 @@ namespace modmanager
             MessageBox.Show("About this profile: \n\n" + ActiveProfile.About());
         }
 
-
+        private void SetSelectedPackage(ModPackage p)
+        {
+            SelectedPackage = p;
+            UpdatePackageInfo(SelectedPackage);
+        }
 
         private void disabled_package_list_SelectedIndexChanged(object sender, EventArgs e)
         {
             disabled_package_list.Select();
             if(disabled_package_list.SelectedItem != null)
             {
-                UpdatePackageInfo(ActiveProfile.Search(disabled_package_list.SelectedItem.ToString()));
+                SetSelectedPackage(ActiveProfile.Search(disabled_package_list.SelectedItem.ToString()));
             }
         }
 
@@ -108,7 +113,7 @@ namespace modmanager
             enabled_package_list.Select();
             if(enabled_package_list.SelectedItem != null)
             {
-                UpdatePackageInfo(ActiveProfile.Search(enabled_package_list.SelectedItem.ToString()));
+                SetSelectedPackage(ActiveProfile.Search(enabled_package_list.SelectedItem.ToString()));
             }
         }
 
@@ -159,6 +164,39 @@ namespace modmanager
             }
 
             UpdatePackageLists();
+        }
+
+        private void createNewPackageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(ActiveProfile.GameName == "")
+            {
+                MessageBox.Show("Please load a profile before using the package editor!", "Error");
+            }
+            else
+            {
+                PackageEditorForm PackageEditor = new PackageEditorForm();
+                PackageEditor.Show();
+            }
+        }
+
+        private void openSelectedPackageInEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveProfile.GameName == "")
+            {
+                MessageBox.Show("Please load a profile before using the package editor!", "Error");
+            }
+            else
+            {
+                if(SelectedPackage == null || SelectedPackage.Name == "")
+                {
+                    MessageBox.Show("Please select a package to open!", "Error");
+                }
+                else
+                {
+                    PackageEditorForm PackageEditor = new PackageEditorForm(SelectedPackage);
+                    PackageEditor.Show();
+                }               
+            }
         }
     }
 }
