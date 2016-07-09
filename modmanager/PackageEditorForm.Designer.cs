@@ -215,6 +215,7 @@
             this.savePackageExistingManifestToolStripMenuItem.Name = "savePackageExistingManifestToolStripMenuItem";
             this.savePackageExistingManifestToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
             this.savePackageExistingManifestToolStripMenuItem.Text = "Save Package (Existing Manifest)";
+            this.savePackageExistingManifestToolStripMenuItem.Click += new System.EventHandler(this.savePackageExistingManifestToolStripMenuItem_Click);
             // 
             // PackageEditorForm
             // 

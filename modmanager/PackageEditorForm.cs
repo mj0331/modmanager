@@ -18,6 +18,7 @@ namespace modmanager
         public PackageEditorForm()
         {
             InitializeComponent();
+            Target = new ModPackage("", "", "");
         }
 
         public PackageEditorForm(ModPackage p)
@@ -41,6 +42,13 @@ namespace modmanager
             description_input.Text = Target.Description;
         }
 
+        public void UpdateTarget()
+        {
+            Target.Name = name_input.Text;
+            Target.Author = author_input.Text;
+            Target.Description = description_input.Text;
+        }
+
         private void loadPackageToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -55,9 +63,20 @@ namespace modmanager
         {
             if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
+                UpdateTarget();
                 string file_path = Path.Combine(folderBrowserDialog1.SelectedPath, "package.json");
                 Target.WriteJSON(file_path);
                 MessageBox.Show("Created package manifest at:\n" + file_path);
+            }
+        }
+
+        private void savePackageExistingManifestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                UpdateTarget();
+                Target.WriteJSON(saveFileDialog1.FileName);
+                MessageBox.Show("Saved package manifest at:\n" + saveFileDialog1.FileName);
             }
         }
     }
