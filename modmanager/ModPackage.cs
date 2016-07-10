@@ -21,7 +21,7 @@ namespace modmanager
 			Name = name;
 			Author = author;
 			Description = description;
-			IsInstalled = false;
+			IsInstalled = isInstalled;
 
 			ModCount = 0;
 			Mods = new Mod[ModCount];

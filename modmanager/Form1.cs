@@ -24,7 +24,7 @@ namespace modmanager
             this.Text = "Mod Manager - (no profile loaded)";
             open_profile_dialog.CheckFileExists = true;
             open_profile_dialog.CheckPathExists = true;
-            open_profile_dialog.Filter = "JSON Files (.json)|*.json";
+            open_profile_dialog.Filter = "JSON Files|*.json";
         }
 
         private void createProfileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,19 +45,15 @@ namespace modmanager
             enabled_package_list.Items.Clear();
             disabled_package_list.Items.Clear();
 
-            ModPackage pack;
-
             for (int i = 0; i < ActiveProfile.PackageCount; i++)
             {
-                pack = ActiveProfile.Packages[i];
-
-                if (pack.IsInstalled)
+                if (ActiveProfile.Packages[i].IsInstalled)
                 {
-                    enabled_package_list.Items.Add(pack.Name);
+                    enabled_package_list.Items.Add(ActiveProfile.Packages[i].Name);
                 }
                 else
                 {
-                    disabled_package_list.Items.Add(pack.Name);
+                    disabled_package_list.Items.Add(ActiveProfile.Packages[i].Name);
                 }
             }
         }
@@ -65,13 +61,6 @@ namespace modmanager
         public void UpdateActiveProfile(Profile p)
         {
             ActiveProfile = p;
-
-            //For testing only
-            //ModPackage t1 = new ModPackage("test1", "mj0331", "Test mod #1");
-            //ModPackage t2 = new ModPackage("test2", "mj0331", "Test mod #2");
-            //ActiveProfile.AddPackage(t1);
-            //ActiveProfile.AddPackage(t2);
-
             ActiveProfile.WriteJSON(PathToActiveProfile);
 
             this.Text = "Mod Manager - " + p.GameName;
@@ -141,6 +130,7 @@ namespace modmanager
             if (disabled_package_list.SelectedItem != null)
             {
                 ActiveProfile.Search(disabled_package_list.SelectedItem.ToString()).Install(ActiveProfile);
+                ActiveProfile.WriteJSON(PathToActiveProfile);
                 UpdatePackageLists();
             }           
         }
@@ -150,6 +140,7 @@ namespace modmanager
             if(enabled_package_list.SelectedItem != null)
             {
                 ActiveProfile.Search(enabled_package_list.SelectedItem.ToString()).Uninstall(ActiveProfile);
+                ActiveProfile.WriteJSON(PathToActiveProfile);
                 UpdatePackageLists();
             }  
         }
