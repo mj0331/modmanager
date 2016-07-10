@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
@@ -47,6 +40,16 @@ namespace modmanager
             Target.Name = name_input.Text;
             Target.Author = author_input.Text;
             Target.Description = description_input.Text;
+
+            Form1.UpdateProfileFile();
+        }
+
+        public void UpdateModList()
+        {
+            for(int i = 0; i < Target.ModCount; i++)
+            {
+                mod_list.Items.Add(Target.Mods[i].TargetFile);
+            }
         }
 
         private void loadPackageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,6 +80,21 @@ namespace modmanager
                 UpdateTarget();
                 Target.WriteJSON(saveFileDialog1.FileName);
                 MessageBox.Show("Saved package manifest at:\n" + saveFileDialog1.FileName);
+            }
+        }
+
+        private void new_mod_button_Click(object sender, EventArgs e)
+        {
+            ModEditor modedit = new ModEditor(Target);
+            if(modedit.ShowDialog() == DialogResult.OK)
+            {
+                Mod m = modedit.GetRawData();
+
+                m.TargetFile = Utils.GetRelativePath(m.TargetFile, Form1.ActiveProfile.GamePath);
+
+                Target.AddMod(m);
+                UpdateTarget();
+                UpdateModList();
             }
         }
     }

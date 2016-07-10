@@ -9,6 +9,13 @@ namespace modmanager
 		public string ModdedFile;
 		public string BackupFile;
 		public bool IsInstalled;
+		public Type ModType;
+
+		public enum Type
+		{
+			Replacement = 0,
+			Addition
+		}
 
 		public Mod(string target, string modded)
 		{

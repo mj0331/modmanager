@@ -34,6 +34,7 @@
             this.loadPackageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.savePackageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.savePackageExistingManifestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.name_label = new System.Windows.Forms.Label();
             this.name_input = new System.Windows.Forms.TextBox();
             this.author_label = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.new_mod_button = new System.Windows.Forms.Button();
             this.edit_mod_button = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.savePackageExistingManifestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
@@ -96,6 +96,13 @@
             this.savePackageToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
             this.savePackageToolStripMenuItem.Text = "Save Package (New Manifest)";
             this.savePackageToolStripMenuItem.Click += new System.EventHandler(this.savePackageToolStripMenuItem_Click);
+            // 
+            // savePackageExistingManifestToolStripMenuItem
+            // 
+            this.savePackageExistingManifestToolStripMenuItem.Name = "savePackageExistingManifestToolStripMenuItem";
+            this.savePackageExistingManifestToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.savePackageExistingManifestToolStripMenuItem.Text = "Save Package (Existing Manifest)";
+            this.savePackageExistingManifestToolStripMenuItem.Click += new System.EventHandler(this.savePackageExistingManifestToolStripMenuItem_Click);
             // 
             // name_label
             // 
@@ -168,6 +175,7 @@
             this.mod_list.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.mod_list.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mod_list.FormattingEnabled = true;
+            this.mod_list.HorizontalScrollbar = true;
             this.mod_list.ItemHeight = 16;
             this.mod_list.Location = new System.Drawing.Point(327, 59);
             this.mod_list.Name = "mod_list";
@@ -184,6 +192,7 @@
             this.new_mod_button.TabIndex = 9;
             this.new_mod_button.Text = "New";
             this.new_mod_button.UseVisualStyleBackColor = true;
+            this.new_mod_button.Click += new System.EventHandler(this.new_mod_button_Click);
             // 
             // edit_mod_button
             // 
@@ -209,13 +218,6 @@
             this.button1.TabIndex = 11;
             this.button1.Text = "Delete";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // savePackageExistingManifestToolStripMenuItem
-            // 
-            this.savePackageExistingManifestToolStripMenuItem.Name = "savePackageExistingManifestToolStripMenuItem";
-            this.savePackageExistingManifestToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.savePackageExistingManifestToolStripMenuItem.Text = "Save Package (Existing Manifest)";
-            this.savePackageExistingManifestToolStripMenuItem.Click += new System.EventHandler(this.savePackageExistingManifestToolStripMenuItem_Click);
             // 
             // PackageEditorForm
             // 

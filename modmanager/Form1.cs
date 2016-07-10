@@ -6,8 +6,8 @@ namespace modmanager
 {
     public partial class Form1 : Form
     {
-        private Profile ActiveProfile;
-        private string PathToActiveProfile;
+        public static Profile ActiveProfile;
+        private static string PathToActiveProfile;
 
         private ModPackage SelectedPackage;
 
@@ -58,10 +58,15 @@ namespace modmanager
             }
         }
 
+        public static void UpdateProfileFile()
+        {
+            ActiveProfile.WriteJSON(PathToActiveProfile);
+        }
+
         public void UpdateActiveProfile(Profile p)
         {
             ActiveProfile = p;
-            ActiveProfile.WriteJSON(PathToActiveProfile);
+            
 
             this.Text = "Mod Manager - " + p.GameName;
             profile_label.Text = p.GameName;
