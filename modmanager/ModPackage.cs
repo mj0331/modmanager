@@ -7,29 +7,29 @@ namespace modmanager
 		public string Name;
 		public string Author;
 		public string Description;
-        public bool IsInstalled;
+		public bool IsInstalled;
 
-        public List<Mod> Mods;
+		public List<Mod> Mods;
 
 		public ModPackage(string name, string author, string description, bool isInstalled = false)
 		{
 			Name = name;
 			Author = author;
 			Description = description;
-            IsInstalled = false;
+			IsInstalled = false;
 		}
 
-        public void Install(Profile p)
-        {
-            //TODO: Implement acctual install code
-            IsInstalled = true;
-        }
+		public void Install(Profile p)
+		{
+			//TODO: Implement acctual install code
+			IsInstalled = true;
+		}
 
-        public void Uninstall(Profile p)
-        {
-            //TODO: Implement acctual uninstall code
-            IsInstalled = false;
-        }
-    }
+		public void Uninstall(Profile p)
+		{
+			//TODO: Implement acctual uninstall code
+			IsInstalled = false;
+		}
+	}
 }
 
