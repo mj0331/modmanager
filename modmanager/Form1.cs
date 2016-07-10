@@ -213,7 +213,16 @@ namespace modmanager
             {
                 if(open_profile_dialog.ShowDialog() == DialogResult.OK)
                 {
-                    
+                    ModPackage p = ModPackage.FromJSON(open_profile_dialog.FileName);
+                    if (p.Name == "")
+                    {
+                        MessageBox.Show("Error creating ModPackage object from file!", "Error");
+                    }
+                    else
+                    {
+                        ActiveProfile.AddPackage(p);
+                        UpdateActiveProfile(ActiveProfile);
+                    }
                 }
             }
         }

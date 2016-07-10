@@ -296,8 +296,8 @@
             // addPackageToProfileToolStripMenuItem
             // 
             this.addPackageToProfileToolStripMenuItem.Name = "addPackageToProfileToolStripMenuItem";
-            this.addPackageToProfileToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.addPackageToProfileToolStripMenuItem.Text = "Add Package To Profile";
+            this.addPackageToProfileToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
+            this.addPackageToProfileToolStripMenuItem.Text = "Add Package To Profile (From JSON Manifest)";
             this.addPackageToProfileToolStripMenuItem.Click += new System.EventHandler(this.addPackageToProfileToolStripMenuItem_Click);
             // 
             // removePackageFromProfileToolStripMenuItem
