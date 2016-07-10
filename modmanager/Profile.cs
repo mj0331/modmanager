@@ -77,6 +77,31 @@ namespace modmanager
 
 		}
 
+		//Returns true if mod existed and has been deleted, false otherwise
+		public bool RemovePackage(ModPackage pack)
+		{
+			bool replace = false;
+			for (int i = 0; i < PackageCount; i++)
+			{
+				if (Packages[i].Name == pack.Name)
+				{
+					replace = true;
+				}
+
+				if(replace)
+				{
+					Packages[i] = Packages[i + 1];
+				}
+			}
+
+			if(replace)
+			{
+				PackageCount--;
+			}
+
+			return replace;
+		}
+
 		public ModPackage Search(string name)
 		{
 			for(int i = 0; i < PackageCount; i++)

@@ -34,6 +34,9 @@
             this.loadProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutThisProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modPackagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewPackageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openSelectedPackageInEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.open_profile_dialog = new System.Windows.Forms.OpenFileDialog();
             this.profile_label = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,9 +51,9 @@
             this.selected_package_author_label = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.selected_package_description = new System.Windows.Forms.TextBox();
-            this.modPackagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createNewPackageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openSelectedPackageInEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modPackagesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addPackageToProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removePackageFromProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +61,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.profileToolStripMenuItem,
+            this.modPackagesToolStripMenuItem1,
             this.modPackagesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -101,6 +105,29 @@
             this.aboutThisProfileToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.aboutThisProfileToolStripMenuItem.Text = "About this profile";
             this.aboutThisProfileToolStripMenuItem.Click += new System.EventHandler(this.aboutThisProfileToolStripMenuItem_Click);
+            // 
+            // modPackagesToolStripMenuItem
+            // 
+            this.modPackagesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNewPackageToolStripMenuItem,
+            this.openSelectedPackageInEditorToolStripMenuItem});
+            this.modPackagesToolStripMenuItem.Name = "modPackagesToolStripMenuItem";
+            this.modPackagesToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+            this.modPackagesToolStripMenuItem.Text = "Package Editor";
+            // 
+            // createNewPackageToolStripMenuItem
+            // 
+            this.createNewPackageToolStripMenuItem.Name = "createNewPackageToolStripMenuItem";
+            this.createNewPackageToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.createNewPackageToolStripMenuItem.Text = "Open Mod Package Editor";
+            this.createNewPackageToolStripMenuItem.Click += new System.EventHandler(this.createNewPackageToolStripMenuItem_Click);
+            // 
+            // openSelectedPackageInEditorToolStripMenuItem
+            // 
+            this.openSelectedPackageInEditorToolStripMenuItem.Name = "openSelectedPackageInEditorToolStripMenuItem";
+            this.openSelectedPackageInEditorToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.openSelectedPackageInEditorToolStripMenuItem.Text = "Open Selected Package In Editor";
+            this.openSelectedPackageInEditorToolStripMenuItem.Click += new System.EventHandler(this.openSelectedPackageInEditorToolStripMenuItem_Click);
             // 
             // profile_label
             // 
@@ -257,28 +284,28 @@
             this.selected_package_description.Size = new System.Drawing.Size(376, 341);
             this.selected_package_description.TabIndex = 14;
             // 
-            // modPackagesToolStripMenuItem
+            // modPackagesToolStripMenuItem1
             // 
-            this.modPackagesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createNewPackageToolStripMenuItem,
-            this.openSelectedPackageInEditorToolStripMenuItem});
-            this.modPackagesToolStripMenuItem.Name = "modPackagesToolStripMenuItem";
-            this.modPackagesToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.modPackagesToolStripMenuItem.Text = "Mod Packages";
+            this.modPackagesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addPackageToProfileToolStripMenuItem,
+            this.removePackageFromProfileToolStripMenuItem});
+            this.modPackagesToolStripMenuItem1.Name = "modPackagesToolStripMenuItem1";
+            this.modPackagesToolStripMenuItem1.Size = new System.Drawing.Size(96, 20);
+            this.modPackagesToolStripMenuItem1.Text = "Mod Packages";
             // 
-            // createNewPackageToolStripMenuItem
+            // addPackageToProfileToolStripMenuItem
             // 
-            this.createNewPackageToolStripMenuItem.Name = "createNewPackageToolStripMenuItem";
-            this.createNewPackageToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.createNewPackageToolStripMenuItem.Text = "Open Mod Package Editor";
-            this.createNewPackageToolStripMenuItem.Click += new System.EventHandler(this.createNewPackageToolStripMenuItem_Click);
+            this.addPackageToProfileToolStripMenuItem.Name = "addPackageToProfileToolStripMenuItem";
+            this.addPackageToProfileToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.addPackageToProfileToolStripMenuItem.Text = "Add Package To Profile";
+            this.addPackageToProfileToolStripMenuItem.Click += new System.EventHandler(this.addPackageToProfileToolStripMenuItem_Click);
             // 
-            // openSelectedPackageInEditorToolStripMenuItem
+            // removePackageFromProfileToolStripMenuItem
             // 
-            this.openSelectedPackageInEditorToolStripMenuItem.Name = "openSelectedPackageInEditorToolStripMenuItem";
-            this.openSelectedPackageInEditorToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.openSelectedPackageInEditorToolStripMenuItem.Text = "Open Selected Package In Editor";
-            this.openSelectedPackageInEditorToolStripMenuItem.Click += new System.EventHandler(this.openSelectedPackageInEditorToolStripMenuItem_Click);
+            this.removePackageFromProfileToolStripMenuItem.Name = "removePackageFromProfileToolStripMenuItem";
+            this.removePackageFromProfileToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
+            this.removePackageFromProfileToolStripMenuItem.Text = "Remove Selected Package From Profile";
+            this.removePackageFromProfileToolStripMenuItem.Click += new System.EventHandler(this.removePackageFromProfileToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -336,6 +363,9 @@
         private System.Windows.Forms.ToolStripMenuItem modPackagesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createNewPackageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openSelectedPackageInEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modPackagesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem addPackageToProfileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removePackageFromProfileToolStripMenuItem;
     }
 }
 

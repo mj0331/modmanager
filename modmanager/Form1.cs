@@ -7,6 +7,8 @@ namespace modmanager
     public partial class Form1 : Form
     {
         private Profile ActiveProfile;
+        private string PathToActiveProfile;
+
         private ModPackage SelectedPackage;
 
         public Form1()
@@ -64,12 +66,13 @@ namespace modmanager
         {
             ActiveProfile = p;
 
-            //TODELETE
-            ModPackage t1 = new ModPackage("test1", "mj0331", "Test mod #1");
-            ModPackage t2 = new ModPackage("test2", "mj0331", "Test mod #2");
+            //For testing only
+            //ModPackage t1 = new ModPackage("test1", "mj0331", "Test mod #1");
+            //ModPackage t2 = new ModPackage("test2", "mj0331", "Test mod #2");
+            //ActiveProfile.AddPackage(t1);
+            //ActiveProfile.AddPackage(t2);
 
-            ActiveProfile.AddPackage(t1);
-            ActiveProfile.AddPackage(t2);
+            ActiveProfile.WriteJSON(PathToActiveProfile);
 
             this.Text = "Mod Manager - " + p.GameName;
             profile_label.Text = p.GameName;
@@ -77,15 +80,28 @@ namespace modmanager
             UpdatePackageLists();
         }
 
+        public bool IsProfileLoaded()
+        {
+            if(ActiveProfile.GameName == "")
+            {
+                MessageBox.Show("No profile loaded!", "Error");
+                return false;
+            }
+
+            return true;
+        }
+
         private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             open_profile_dialog.ShowDialog();
             Stream s = open_profile_dialog.OpenFile();
             StreamReader sr = new StreamReader(s);
-
-            UpdateActiveProfile(Profile.FromJSON(sr.ReadToEnd()));
-
+            Profile p = Profile.FromJSON(sr.ReadToEnd());
+            sr.Close();
             s.Close();
+
+            PathToActiveProfile = Path.GetDirectoryName(open_profile_dialog.FileName);
+            UpdateActiveProfile(p);
         }
 
         private void aboutThisProfileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -168,11 +184,7 @@ namespace modmanager
 
         private void createNewPackageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(ActiveProfile.GameName == "")
-            {
-                MessageBox.Show("Please load a profile before using the package editor!", "Error");
-            }
-            else
+            if(IsProfileLoaded())
             {
                 PackageEditorForm PackageEditor = new PackageEditorForm();
                 PackageEditor.Show();
@@ -181,11 +193,7 @@ namespace modmanager
 
         private void openSelectedPackageInEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveProfile.GameName == "")
-            {
-                MessageBox.Show("Please load a profile before using the package editor!", "Error");
-            }
-            else
+            if(IsProfileLoaded())
             {
                 if(SelectedPackage == null || SelectedPackage.Name == "")
                 {
@@ -196,6 +204,29 @@ namespace modmanager
                     PackageEditorForm PackageEditor = new PackageEditorForm(SelectedPackage);
                     PackageEditor.Show();
                 }               
+            }
+        }
+
+        private void addPackageToProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(IsProfileLoaded())
+            {
+                if(open_profile_dialog.ShowDialog() == DialogResult.OK)
+                {
+                    
+                }
+            }
+        }
+
+        private void removePackageFromProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(IsProfileLoaded())
+            {
+                if(SelectedPackage != null || SelectedPackage.Name != "")
+                {
+                    ActiveProfile.RemovePackage(SelectedPackage);
+                    UpdateActiveProfile(ActiveProfile);
+                }
             }
         }
     }

@@ -46,9 +46,22 @@ namespace modmanager
 			IsInstalled = false;
 		}
 
+        public static ModPackage FromJSON(string filepath)
+        {
+            ModPackage pack = JsonConvert.DeserializeObject<ModPackage>(File.ReadAllText(filepath));
+
+            if(pack != null)
+            {
+                return pack;
+            }
+
+            return new ModPackage("", "", "");
+        }
+
 		public void AddMod(Mod m)
 		{
-			if(ModCount >= Mods.Length)
+            //Make sure there is always at least one empty slot
+			if(ModCount >= Mods.Length - 1)
 			{
 				Array.Resize<Mod>(ref Mods, Mods.Length + ModArrayIncreaseSize);
 			}
