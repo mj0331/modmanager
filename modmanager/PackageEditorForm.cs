@@ -19,7 +19,6 @@ namespace modmanager
             InitializeComponent();
             Target = p;
             UpdateDisplayData();
-            UpdateModList();
         }
 
         private void InitializeDialogs()
@@ -34,6 +33,8 @@ namespace modmanager
             name_input.Text = Target.Name;
             author_input.Text = Target.Author;
             description_input.Text = Target.Description;
+
+            UpdateModList();
         }
 
         public void UpdateTarget()
@@ -47,6 +48,8 @@ namespace modmanager
 
         public void UpdateModList()
         {
+            mod_list.Items.Clear();
+
             for(int i = 0; i < Target.ModCount; i++)
             {
                 mod_list.Items.Add(Target.Mods[i].TargetFile);
@@ -95,7 +98,7 @@ namespace modmanager
 
                 Target.AddMod(m);
                 UpdateTarget();
-                UpdateModList();
+                UpdateDisplayData();
             }
         }
     }

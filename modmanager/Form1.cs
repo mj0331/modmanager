@@ -63,6 +63,11 @@ namespace modmanager
             ActiveProfile.WriteJSON(PathToActiveProfile);
         }
 
+        public void RefreshActiveProfileFromJSON()
+        {
+            UpdateActiveProfile(Profile.ReadJSON(PathToActiveProfile));
+        }
+
         public void UpdateActiveProfile(Profile p)
         {
             ActiveProfile = p;
@@ -183,7 +188,8 @@ namespace modmanager
             if(IsProfileLoaded())
             {
                 PackageEditorForm PackageEditor = new PackageEditorForm();
-                PackageEditor.Show();
+                PackageEditor.ShowDialog();
+                RefreshActiveProfileFromJSON();
             }
         }
 
