@@ -19,6 +19,7 @@ namespace modmanager
             InitializeComponent();
             Target = p;
             UpdateDisplayData();
+            UpdateModList();
         }
 
         private void InitializeDialogs()
