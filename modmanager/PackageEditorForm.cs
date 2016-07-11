@@ -63,7 +63,25 @@ namespace modmanager
 
 		private void edit_mod_button_Click(object sender, EventArgs e)
 		{
-		   
+		   	if(mod_list.SelectedItem != null)
+			{
+				Mod t = Target.FindByTarget(mod_list.SelectedItem.ToString());
+				
+				if(t != null)
+				{
+					ModEditor modedit = new ModEditor(Target, t);
+					if (modedit.ShowDialog() == DialogResult.OK)
+					{
+						Mod m = modedit.GetRawData();
+
+						m.TargetFile = Utils.GetRelativePath(m.TargetFile, Form1.ActiveProfile.GamePath);
+
+						Target.ReplaceMod(mod_list.SelectedItem.ToString(), m);
+						UpdateTarget();
+						UpdateDisplayData();
+					}
+				}
+			}
 		}
 
 		private void savePackageToolStripMenuItem_Click(object sender, EventArgs e)

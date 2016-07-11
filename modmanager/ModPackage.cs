@@ -83,6 +83,17 @@ namespace modmanager
 			ModCount++;
 		}
 
+		public void ReplaceMod(string target_path, Mod replacement)
+		{
+			for(int i = 0; i < ModCount; i++)
+			{
+				if(Mods[i].TargetFile == target_path)
+				{
+					Mods[i] = replacement;
+				}
+			}
+		}
+
 		public void DeleteMod(Mod m)
 		{
 			bool isFound = false;
