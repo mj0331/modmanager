@@ -217,7 +217,7 @@ namespace modmanager
                 if(open_profile_dialog.ShowDialog() == DialogResult.OK)
                 {
                     ModPackage p = ModPackage.FromJSON(open_profile_dialog.FileName);
-                    if (p.Name == "")
+                    if (p == null)
                     {
                         MessageBox.Show("Error creating ModPackage object from file!", "Error");
                     }

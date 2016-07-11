@@ -55,7 +55,20 @@ namespace modmanager
 				return pack;
 			}
 
-			return new ModPackage("", "", "");
+			return null;
+		}
+
+		public Mod FindByTarget(string rel_target_path)
+		{
+			for(int i = 0; i < ModCount; i++)
+			{
+				if(Mods[i].TargetFile == rel_target_path)
+				{
+					return Mods[i];
+				}
+			}
+
+			return null;
 		}
 
 		public void AddMod(Mod m)
@@ -63,11 +76,38 @@ namespace modmanager
 			//Make sure there is always at least one empty slot
 			if(ModCount >= Mods.Length - 1)
 			{
-				Array.Resize<Mod>(ref Mods, Mods.Length + ModArrayIncreaseSize);
+				Array.Resize<Mod>(ref Mods, Mods.Length + ModArrayIncreaseSize + 1);
 			}
 
 			Mods[ModCount] = m;
 			ModCount++;
+		}
+
+		public void DeleteMod(Mod m)
+		{
+			bool isFound = false;
+
+			for(int i = 0; i < ModCount; i++)
+			{
+				if(Mods[i].TargetFile == m.TargetFile)
+				{
+					isFound = true;
+				}
+
+				if(isFound)
+				{
+					if(i == ModCount - 1)
+					{
+						Mods[i] = null;
+					}
+					else
+					{
+						Mods[i] = Mods[i + 1];
+					}
+
+					ModCount--;
+				}
+			}
 		}
 	}
 }

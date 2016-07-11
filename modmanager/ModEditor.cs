@@ -23,6 +23,7 @@ namespace modmanager
             TargetPack = pack;
             IsNew = true;
             targetFile.InitialDirectory = Form1.ActiveProfile.GamePath;
+            UpdateDisplayData();
         }
 
         public ModEditor(ModPackage pack, Mod m)
@@ -32,6 +33,13 @@ namespace modmanager
             TargetPack = pack;
             IsNew = false;
             targetFile.InitialDirectory = Form1.ActiveProfile.GamePath;
+            UpdateDisplayData();
+        }
+
+        public void UpdateDisplayData()
+        {
+            modded_path.Text = ActiveMod.ModdedFile;
+            target_path.Text = ActiveMod.TargetFile;
         }
 
         private void modded_browse_Click(object sender, EventArgs e)

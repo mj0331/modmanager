@@ -112,7 +112,7 @@ namespace modmanager
 				}
 			}
 
-			return new ModPackage("", "", "");
+			return null;
 		}
 	}
 }
