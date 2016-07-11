@@ -77,6 +77,7 @@ namespace modmanager
             profile_label.Text = p.GameName;
 
             UpdatePackageLists();
+            UpdateProfileFile();
         }
 
         public bool IsProfileLoaded()
@@ -222,6 +223,7 @@ namespace modmanager
                     }
                     else
                     {
+                        p.IsInstalled = false;
                         ActiveProfile.AddPackage(p);
                         UpdateActiveProfile(ActiveProfile);
                     }
