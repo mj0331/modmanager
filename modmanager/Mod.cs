@@ -26,7 +26,7 @@ namespace modmanager
 
 		public void SetBackup(Profile p)
 		{
-			BackupFile = Path.Combine(p.GetBackupRoot(), TargetFile);
+			BackupFile = Path.Combine(p.BackupRoot, TargetFile);
 		}
 
 		public string GetBackup()
@@ -36,7 +36,7 @@ namespace modmanager
 
 		public void SwapFiles(Profile p)
 		{
-			string f1_path = Path.Combine(p.GetBackupRoot(), TargetFile);
+			string f1_path = Path.Combine(p.BackupRoot, TargetFile);
 			string f2_path = ModdedFile;
 
 			File.Create("swap_buffer.temp");

@@ -19,7 +19,7 @@ namespace modmanager
 
 		private void InitModManager()
 		{
-			ActiveProfile = new Profile("", "", "");
+			ActiveProfile = new Profile("", "", "", "");
 
 			this.Text = "Mod Manager - (no profile loaded)";
 			open_profile_dialog.CheckFileExists = true;
@@ -250,6 +250,15 @@ namespace modmanager
 				Utils.MakeTNTArchiveFromManifest(open_manifest_dialog.FileName);
 				MessageBox.Show("Created archive at:\n" + Utils.GetLastDirectory(Utils.GetLastDirectory(open_manifest_dialog.FileName)));
 			}
+		}
+
+		private void addPackageToProfileFromTNTArchiveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(open_tnt_dialog.ShowDialog() == DialogResult.OK)
+			{
+				Utils.ExtractTNTArchive(open_tnt_dialog.FileName, ActiveProfile);
+			}
+			
 		}
 	}
 }

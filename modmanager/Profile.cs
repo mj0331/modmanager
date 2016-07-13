@@ -12,27 +12,24 @@ namespace modmanager
 
 		public string GameName;
 		public string GamePath;
+		public string ModPath;
 		public string BackupRoot;
 		public int FileFormatVersion;
 
 		public int PackageCount;
 		public ModPackage[] Packages;
 
-		public Profile(string game_name, string game_path, string backup_root, int ff_version = Profile.LatestFileFormatVersion)
+		public Profile(string game_name, string game_path, string mod_path, string backup_root, int ff_version = Profile.LatestFileFormatVersion)
 		{
 			GameName = game_name;
 			GamePath = game_path;
+			ModPath = mod_path;
 			BackupRoot = backup_root;
 			FileFormatVersion = ff_version;
 
 			PackageCount = 0;
 			Packages = new ModPackage[PackageCount];
 			
-		}
-
-		public string GetBackupRoot()
-		{
-			return BackupRoot;
 		}
 
 		public void WriteJSON(string profile_file_path)
@@ -59,6 +56,7 @@ namespace modmanager
 		{
 			string about = "Game name: " + GameName + "\n" +
 							"Game path: " + GamePath + "\n" +
+							"Mods path: " + ModPath + "\n" +
 							"Backup path: " + BackupRoot + "\n" +
 							"Profile format version: " + FileFormatVersion + "\n";
 

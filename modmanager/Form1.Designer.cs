@@ -37,6 +37,8 @@
 			this.modPackagesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.addPackageToProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.removePackageFromProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.makeTNTArchiveFromJSONManifestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.modPackagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.createNewPackageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openSelectedPackageInEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,9 +56,9 @@
 			this.selected_package_author_label = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.selected_package_description = new System.Windows.Forms.TextBox();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.makeTNTArchiveFromJSONManifestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.open_manifest_dialog = new System.Windows.Forms.OpenFileDialog();
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.open_tnt_dialog = new System.Windows.Forms.OpenFileDialog();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -112,6 +114,7 @@
 			// modPackagesToolStripMenuItem1
 			// 
 			this.modPackagesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addPackageToProfileFromTNTArchiveToolStripMenuItem,
             this.addPackageToProfileToolStripMenuItem,
             this.removePackageFromProfileToolStripMenuItem,
             this.toolStripSeparator2,
@@ -133,6 +136,18 @@
 			this.removePackageFromProfileToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
 			this.removePackageFromProfileToolStripMenuItem.Text = "Remove Selected Package From Profile";
 			this.removePackageFromProfileToolStripMenuItem.Click += new System.EventHandler(this.removePackageFromProfileToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(313, 6);
+			// 
+			// makeTNTArchiveFromJSONManifestToolStripMenuItem
+			// 
+			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Name = "makeTNTArchiveFromJSONManifestToolStripMenuItem";
+			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
+			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Text = "Make .TNT Archive From .JSON Manifest";
+			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Click += new System.EventHandler(this.makeTNTArchiveFromJSONManifestToolStripMenuItem_Click);
 			// 
 			// modPackagesToolStripMenuItem
 			// 
@@ -312,21 +327,20 @@
 			this.selected_package_description.Size = new System.Drawing.Size(376, 341);
 			this.selected_package_description.TabIndex = 14;
 			// 
-			// toolStripSeparator2
-			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(313, 6);
-			// 
-			// makeTNTArchiveFromJSONManifestToolStripMenuItem
-			// 
-			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Name = "makeTNTArchiveFromJSONManifestToolStripMenuItem";
-			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
-			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Text = "Make .TNT Archive From .JSON Manifest";
-			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Click += new System.EventHandler(this.makeTNTArchiveFromJSONManifestToolStripMenuItem_Click);
-			// 
 			// open_manifest_dialog
 			// 
 			this.open_manifest_dialog.FileName = "package.json";
+			// 
+			// addPackageToProfileFromTNTArchiveToolStripMenuItem
+			// 
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Name = "addPackageToProfileFromTNTArchiveToolStripMenuItem";
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Text = "Add Package To Profile (From .TNT Archive)";
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Click += new System.EventHandler(this.addPackageToProfileFromTNTArchiveToolStripMenuItem_Click);
+			// 
+			// open_tnt_dialog
+			// 
+			this.open_tnt_dialog.FileName = "openFileDialog1";
 			// 
 			// Form1
 			// 
@@ -390,6 +404,8 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem makeTNTArchiveFromJSONManifestToolStripMenuItem;
 		private System.Windows.Forms.OpenFileDialog open_manifest_dialog;
+		private System.Windows.Forms.ToolStripMenuItem addPackageToProfileFromTNTArchiveToolStripMenuItem;
+		private System.Windows.Forms.OpenFileDialog open_tnt_dialog;
 	}
 }
 
