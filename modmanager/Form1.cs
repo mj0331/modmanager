@@ -216,16 +216,23 @@ namespace modmanager
 			{
 				if(open_profile_dialog.ShowDialog() == DialogResult.OK)
 				{
-					ModPackage p = ModPackage.FromJSON(open_profile_dialog.FileName);
-					if (p == null)
+					ModPackage pack = ModPackage.FromJSON(open_profile_dialog.FileName);
+					if (pack == null)
 					{
 						MessageBox.Show("Error creating ModPackage object from file!", "Error");
 					}
 					else
 					{
-						p.IsInstalled = false;
-						ActiveProfile.AddPackage(p);
-						UpdateActiveProfile(ActiveProfile);
+						if (ActiveProfile.HasDuplicate(pack))
+						{
+							MessageBox.Show("The mod you are trying to add to your profile is already added!");
+						}
+						else
+						{
+							pack.IsInstalled = false;
+							ActiveProfile.AddPackage(pack);
+							UpdateActiveProfile(ActiveProfile);
+						}
 					}
 				}
 			}
@@ -254,9 +261,30 @@ namespace modmanager
 
 		private void addPackageToProfileFromTNTArchiveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if(open_tnt_dialog.ShowDialog() == DialogResult.OK)
+			if(IsProfileLoaded())
 			{
-				Utils.ExtractTNTArchive(open_tnt_dialog.FileName, ActiveProfile);
+				if (open_tnt_dialog.ShowDialog() == DialogResult.OK)
+				{
+					ModPackage pack = Utils.ExtractTNTArchive(open_tnt_dialog.FileName, ActiveProfile);
+
+					if(pack == null)
+					{
+						MessageBox.Show("Error creating ModPackage from TNT archive!");
+					}
+					else
+					{
+						if(ActiveProfile.HasDuplicate(pack))
+						{
+							MessageBox.Show("The mod you are trying to add to your profile is already added!");
+						}
+						else
+						{
+							pack.IsInstalled = false;
+							ActiveProfile.AddPackage(pack);
+							UpdateActiveProfile(ActiveProfile);
+						}
+					}
+				}
 			}
 			
 		}

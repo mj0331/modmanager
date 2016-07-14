@@ -112,6 +112,47 @@ namespace modmanager
 
 			return null;
 		}
+
+		public bool HasDuplicate(ModPackage p)
+		{
+			for(int i = 0; i < PackageCount; i++)
+			{
+				if(Packages[i].Name == p.Name)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool IsOriginal(string rel_path)
+		{
+			//Assume file is not modded
+			bool isOriginal = true;
+
+			//Go through all the packages
+			for(int i = 0; i < PackageCount; i++)
+			{
+				//If the package is installed check if it affects the file
+				if(Packages[i].IsInstalled)
+				{
+					ModPackage pack = Packages[i];
+					//Go through the files in the mod
+					for (int j = 0; j < pack.ModCount; j++)
+					{
+						//If the target file matches the given file
+						if(pack.Mods[j].TargetFile == rel_path)
+						{
+							//The given file if modded
+							isOriginal = false;
+						}
+					}
+				}
+			}
+
+			return isOriginal;
+		}
 	}
 }
 

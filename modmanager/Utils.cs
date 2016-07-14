@@ -68,8 +68,11 @@ namespace modmanager
 			string temp_json_path = Path.Combine(temp_path, "package.json");
 
 			//Delete the existing directory if it exists
-			Directory.Delete(temp_path, true);
-
+			if(Directory.Exists(temp_path))
+			{
+				Directory.Delete(temp_path, true);
+			}
+			
 			//Extract the .TNT archive and get it's name
 			ZipFile.ExtractToDirectory(archive_path, temp_path);
 			pack = ModPackage.FromJSON(temp_json_path);
@@ -78,7 +81,14 @@ namespace modmanager
 			string final_path = Path.Combine(p.ModPath, pack.Name);
 
 			//And move the content from the temp path to it's final resting place
-			Directory.Move(temp_path, final_path);
+			try
+			{
+				Directory.Move(temp_path, final_path);
+			}
+			catch (IOException e)
+			{
+				System.Windows.Forms.MessageBox.Show("Error creating folder for the mod. Is the mod already installed?\n____________________\n\n" + e);
+			}
 
 			return pack;
 		}
