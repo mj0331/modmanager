@@ -120,6 +120,32 @@ namespace modmanager
 				}
 			}
 		}
+
+		public void BackupIfNeeded(Profile p)
+		{
+			string backup_path;
+
+			for(int i = 0; i < ModCount; i++)
+			{
+				backup_path = Path.Combine(p.BackupRoot, Mods[i].BackupFile);
+
+				if(!File.Exists(backup_path))
+				{
+					string file_path = Path.Combine(p.GamePath, Mods[i].BackupFile);
+					string backup_dir_path = Utils.GetLastDirectory(backup_path);
+
+					try
+					{
+						Directory.CreateDirectory(backup_dir_path);
+						File.Copy(file_path, backup_path);
+					}
+					catch(Exception e)
+					{
+						System.Windows.Forms.MessageBox.Show("Error creating backup!\n\nFROM: " + file_path + "\nTO:" + backup_path + "\n\n" + e.Message);
+					}
+				}
+			}
+		}
 	}
 }
 

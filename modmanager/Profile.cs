@@ -153,6 +153,29 @@ namespace modmanager
 
 			return isOriginal;
 		}
+
+		//Check if one of the mods in the pack in targeting the same file as an existing pack
+		public bool IsConflictingWithInstalled(ModPackage p)
+		{
+			for(int i = 0; i < PackageCount; i++)
+			{
+				if(Packages[i].IsInstalled)
+				{
+					for (int j = 0; j < Packages[i].ModCount; j++)
+					{
+						for (int k = 0; k < p.ModCount; k++)
+						{
+							if (p.Mods[k].TargetFile == Packages[i].Mods[j].TargetFile)
+							{
+								return true;
+							}
+						}
+					}
+				}
+			}
+			return false;
+		}
+
 	}
 }
 

@@ -47,8 +47,8 @@ namespace modmanager
 		{
 			if(moddedFile.ShowDialog() == DialogResult.OK)
 			{
-				modded_path.Text = moddedFile.FileName;
-				ActiveMod.ModdedFile = moddedFile.FileName;
+				modded_path.Text = moddedFile.FileName.TrimStart('\\');
+				ActiveMod.ModdedFile = moddedFile.FileName.TrimStart('\\');
 			}
 		}
 
@@ -56,8 +56,8 @@ namespace modmanager
 		{
 			if(targetFile.ShowDialog() == DialogResult.OK)
 			{
-				target_path.Text = targetFile.FileName;
-				ActiveMod.TargetFile = targetFile.FileName;
+				target_path.Text = targetFile.FileName.TrimStart('\\');
+				ActiveMod.TargetFile = targetFile.FileName.TrimStart('\\');
 			}
 		}
 

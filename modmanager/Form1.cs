@@ -137,12 +137,26 @@ namespace modmanager
 
 		private void enable_selected_button_Click(object sender, EventArgs e)
 		{
-			
 			if (disabled_package_list.SelectedItem != null)
 			{
-				ActiveProfile.Search(disabled_package_list.SelectedItem.ToString()).Install(ActiveProfile);
-				ActiveProfile.WriteJSON(PathToActiveProfile);
-				UpdatePackageLists();
+				ModPackage pack = ActiveProfile.Search(disabled_package_list.SelectedItem.ToString());
+				if(pack == null)
+				{
+					MessageBox.Show("Cannot find mod package '" + disabled_package_list.SelectedItem + "'!");
+				}
+				else
+				{
+					//Install each mod in the mod package
+					for(int i = 0; i < pack.ModCount; i++)
+					{
+						pack.Mods[i].Install(ActiveProfile, pack);
+					}
+
+					//Update the profile after install is done
+					pack.IsInstalled = true;
+					ActiveProfile.WriteJSON(PathToActiveProfile);
+					UpdatePackageLists();
+				}
 			}           
 		}
 
@@ -150,9 +164,23 @@ namespace modmanager
 		{
 			if(enabled_package_list.SelectedItem != null)
 			{
-				ActiveProfile.Search(enabled_package_list.SelectedItem.ToString()).Uninstall(ActiveProfile);
-				ActiveProfile.WriteJSON(PathToActiveProfile);
-				UpdatePackageLists();
+				ModPackage pack = ActiveProfile.Search(enabled_package_list.SelectedItem.ToString());
+				if (pack == null)
+				{
+					MessageBox.Show("Cannot find mod package '" + enabled_package_list.SelectedItem + "'!");
+				}
+				else
+				{
+					//Uninstall each mod in the mod package
+					for (int i = 0; i < pack.ModCount; i++)
+					{
+						pack.Mods[i].Uninstall(ActiveProfile, pack);
+					}
+
+					//Update the profile after uninstall is done
+					ActiveProfile.WriteJSON(PathToActiveProfile);
+					UpdatePackageLists();
+				}
 			}  
 		}
 
@@ -230,6 +258,7 @@ namespace modmanager
 						else
 						{
 							pack.IsInstalled = false;
+							pack.BackupIfNeeded(ActiveProfile);
 							ActiveProfile.AddPackage(pack);
 							UpdateActiveProfile(ActiveProfile);
 						}
@@ -280,6 +309,7 @@ namespace modmanager
 						else
 						{
 							pack.IsInstalled = false;
+							pack.BackupIfNeeded(ActiveProfile);
 							ActiveProfile.AddPackage(pack);
 							UpdateActiveProfile(ActiveProfile);
 						}
