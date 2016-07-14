@@ -285,8 +285,7 @@ namespace modmanager
 						}
 					}
 				}
-			}
-			
+			}			
 		}
 	}
 }

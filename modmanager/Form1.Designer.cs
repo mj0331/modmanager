@@ -1,33 +1,33 @@
 ﻿namespace modmanager
 {
-    partial class Form1
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class Form1
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.createProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,6 +35,7 @@
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.aboutThisProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.modPackagesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addPackageToProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.removePackageFromProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -57,7 +58,6 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.selected_package_description = new System.Windows.Forms.TextBox();
 			this.open_manifest_dialog = new System.Windows.Forms.OpenFileDialog();
-			this.addPackageToProfileFromTNTArchiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.open_tnt_dialog = new System.Windows.Forms.OpenFileDialog();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -65,9 +65,9 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.profileToolStripMenuItem,
-            this.modPackagesToolStripMenuItem1,
-            this.modPackagesToolStripMenuItem});
+			this.profileToolStripMenuItem,
+			this.modPackagesToolStripMenuItem1,
+			this.modPackagesToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(944, 24);
@@ -77,10 +77,10 @@
 			// profileToolStripMenuItem
 			// 
 			this.profileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createProfileToolStripMenuItem,
-            this.loadProfileToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.aboutThisProfileToolStripMenuItem});
+			this.createProfileToolStripMenuItem,
+			this.loadProfileToolStripMenuItem,
+			this.toolStripSeparator1,
+			this.aboutThisProfileToolStripMenuItem});
 			this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
 			this.profileToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
 			this.profileToolStripMenuItem.Text = "Profile";
@@ -114,14 +114,21 @@
 			// modPackagesToolStripMenuItem1
 			// 
 			this.modPackagesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addPackageToProfileFromTNTArchiveToolStripMenuItem,
-            this.addPackageToProfileToolStripMenuItem,
-            this.removePackageFromProfileToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.makeTNTArchiveFromJSONManifestToolStripMenuItem});
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem,
+			this.addPackageToProfileToolStripMenuItem,
+			this.removePackageFromProfileToolStripMenuItem,
+			this.toolStripSeparator2,
+			this.makeTNTArchiveFromJSONManifestToolStripMenuItem});
 			this.modPackagesToolStripMenuItem1.Name = "modPackagesToolStripMenuItem1";
 			this.modPackagesToolStripMenuItem1.Size = new System.Drawing.Size(96, 20);
 			this.modPackagesToolStripMenuItem1.Text = "Mod Packages";
+			// 
+			// addPackageToProfileFromTNTArchiveToolStripMenuItem
+			// 
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Name = "addPackageToProfileFromTNTArchiveToolStripMenuItem";
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Text = "Add Package To Profile (From .TNT Archive)";
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Click += new System.EventHandler(this.addPackageToProfileFromTNTArchiveToolStripMenuItem_Click);
 			// 
 			// addPackageToProfileToolStripMenuItem
 			// 
@@ -152,8 +159,8 @@
 			// modPackagesToolStripMenuItem
 			// 
 			this.modPackagesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createNewPackageToolStripMenuItem,
-            this.openSelectedPackageInEditorToolStripMenuItem});
+			this.createNewPackageToolStripMenuItem,
+			this.openSelectedPackageInEditorToolStripMenuItem});
 			this.modPackagesToolStripMenuItem.Name = "modPackagesToolStripMenuItem";
 			this.modPackagesToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
 			this.modPackagesToolStripMenuItem.Text = "Package Editor";
@@ -331,13 +338,6 @@
 			// 
 			this.open_manifest_dialog.FileName = "package.json";
 			// 
-			// addPackageToProfileFromTNTArchiveToolStripMenuItem
-			// 
-			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Name = "addPackageToProfileFromTNTArchiveToolStripMenuItem";
-			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
-			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Text = "Add Package To Profile (From .TNT Archive)";
-			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Click += new System.EventHandler(this.addPackageToProfileFromTNTArchiveToolStripMenuItem_Click);
-			// 
 			// open_tnt_dialog
 			// 
 			this.open_tnt_dialog.FileName = "openFileDialog1";
@@ -371,36 +371,36 @@
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createProfileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadProfileToolStripMenuItem;
-        private System.Windows.Forms.OpenFileDialog open_profile_dialog;
-        private System.Windows.Forms.Label profile_label;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem aboutThisProfileToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox disabled_package_list;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button enable_selected_button;
-        private System.Windows.Forms.Button disable_selected_button;
-        private System.Windows.Forms.ListBox enabled_package_list;
-        private System.Windows.Forms.Button disable_all_button;
-        private System.Windows.Forms.Button enable_all_button;
-        private System.Windows.Forms.Label selected_package_name_label;
-        private System.Windows.Forms.Label selected_package_author_label;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox selected_package_description;
-        private System.Windows.Forms.ToolStripMenuItem modPackagesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createNewPackageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openSelectedPackageInEditorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modPackagesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem addPackageToProfileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removePackageFromProfileToolStripMenuItem;
+		private System.Windows.Forms.MenuStrip menuStrip1;
+		private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem createProfileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem loadProfileToolStripMenuItem;
+		private System.Windows.Forms.OpenFileDialog open_profile_dialog;
+		private System.Windows.Forms.Label profile_label;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripMenuItem aboutThisProfileToolStripMenuItem;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ListBox disabled_package_list;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button enable_selected_button;
+		private System.Windows.Forms.Button disable_selected_button;
+		private System.Windows.Forms.ListBox enabled_package_list;
+		private System.Windows.Forms.Button disable_all_button;
+		private System.Windows.Forms.Button enable_all_button;
+		private System.Windows.Forms.Label selected_package_name_label;
+		private System.Windows.Forms.Label selected_package_author_label;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TextBox selected_package_description;
+		private System.Windows.Forms.ToolStripMenuItem modPackagesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem createNewPackageToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem openSelectedPackageInEditorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem modPackagesToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem addPackageToProfileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem removePackageFromProfileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem makeTNTArchiveFromJSONManifestToolStripMenuItem;
 		private System.Windows.Forms.OpenFileDialog open_manifest_dialog;

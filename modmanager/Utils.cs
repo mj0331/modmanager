@@ -49,6 +49,7 @@ namespace modmanager
 				for(int i = 0; i < pack.ModCount; i++)
 				{
 					pack.Mods[i].ModdedFile = Utils.GetRelativePath(pack.Mods[i].ModdedFile, manifest_dir);
+					pack.Mods[i].BackupFile = pack.Mods[i].TargetFile;
 				}
 
 				pack.WriteJSON(manifest_path);
