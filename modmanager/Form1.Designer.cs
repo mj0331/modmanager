@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.createProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -363,6 +364,7 @@
 			this.Controls.Add(this.profile_label);
 			this.Controls.Add(this.menuStrip1);
 			this.ForeColor = System.Drawing.SystemColors.Control;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
 			this.Text = "Mod Manager";

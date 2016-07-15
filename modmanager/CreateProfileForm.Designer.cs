@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateProfileForm));
 			this.label1 = new System.Windows.Forms.Label();
 			this.name_input = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
@@ -220,6 +221,7 @@
 			this.Controls.Add(this.name_input);
 			this.Controls.Add(this.label1);
 			this.ForeColor = System.Drawing.SystemColors.Control;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "CreateProfileForm";
 			this.Text = "Create Profile";
 			this.ResumeLayout(false);

@@ -154,6 +154,7 @@ namespace modmanager
 
 					//Update the profile after install is done
 					pack.IsInstalled = true;
+					ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
 					ActiveProfile.WriteJSON(PathToActiveProfile);
 					UpdatePackageLists();
 				}
@@ -178,6 +179,8 @@ namespace modmanager
 					}
 
 					//Update the profile after uninstall is done
+					pack.IsInstalled = false;
+					ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
 					ActiveProfile.WriteJSON(PathToActiveProfile);
 					UpdatePackageLists();
 				}

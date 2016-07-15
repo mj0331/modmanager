@@ -122,8 +122,19 @@ namespace modmanager
 					return true;
 				}
 			}
-
 			return false;
+		}
+
+		public int FindPackageIndex(ModPackage p)
+		{
+			for (int i = 0; i < PackageCount; i++)
+			{
+				if (Packages[i].Name == p.Name)
+				{
+					return i;
+				}
+			}
+			return -1;
 		}
 
 		public bool IsOriginal(string rel_path)
