@@ -1,6 +1,10 @@
 # modmanager
 A simple mod management tool created for the game Tooth & Tail(http://www.toothandtailgame.com/), but can be used for other games as well. The tool works by swapping modded files with the original ones. Right now the tool is still in development and it is not ready for the public.
 
+__Platform:__ Windows
+
+__Requires:__ .NET Framework v4.6
+
 # Creating a profile
 There isn't much you can do with the mod manager without a profile loaded. The profile contains info the mod manager needs in order to install an uninstall mods. In order to create a profile click *Profile* -> *Create new profile*. A window will pop up with the following fields.
 
