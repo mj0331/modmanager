@@ -4,161 +4,330 @@ using System.IO;
 
 namespace modmanager
 {
-    public partial class Form1 : Form
-    {
-        private Profile ActiveProfile;
+	public partial class Form1 : Form
+	{
+		public static Profile ActiveProfile;
+		private static string PathToActiveProfile;
 
-        public Form1()
-        {
-            InitializeComponent();
-            InitModManager();
-        }
+		private ModPackage SelectedPackage;
 
-        private void InitModManager()
-        {
-            ActiveProfile = new Profile("", "", "");
+		public Form1()
+		{
+			InitializeComponent();
+			InitModManager();
+		}
 
-            this.Text = "Mod Manager - (no profile loaded)";
-            open_profile_dialog.CheckFileExists = true;
-            open_profile_dialog.CheckPathExists = true;
-            open_profile_dialog.Filter = "JSON Files (.json)|*.json";
-        }
+		private void InitModManager()
+		{
+			ActiveProfile = new Profile("", "", "", "");
 
-        private void createProfileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CreateProfileForm create_profile_form = new CreateProfileForm();
-            create_profile_form.Show();
-        }
+			this.Text = "Mod Manager - (no profile loaded)";
+			open_profile_dialog.CheckFileExists = true;
+			open_profile_dialog.CheckPathExists = true;
+			open_profile_dialog.Filter = "JSON Files|*.json";
+		}
 
-        public void UpdatePackageInfo(ModPackage pack)
-        {
-            selected_package_name_label.Text = pack.Name;
-            selected_package_author_label.Text = "By " + pack.Author;
-            selected_package_description.Text = pack.Description;
-        }
+		private void createProfileToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CreateProfileForm create_profile_form = new CreateProfileForm();
+			create_profile_form.Show();
+		}
 
-        public void UpdatePackageLists()
-        {
-            enabled_package_list.Items.Clear();
-            disabled_package_list.Items.Clear();
+		public void UpdatePackageInfo(ModPackage pack)
+		{
+			selected_package_name_label.Text = pack.Name;
+			selected_package_author_label.Text = "By " + pack.Author;
+			selected_package_description.Text = pack.Description;
+		}
 
-            ModPackage pack;
+		public void UpdatePackageLists()
+		{
+			enabled_package_list.Items.Clear();
+			disabled_package_list.Items.Clear();
 
-            for (int i = 0; i < ActiveProfile.PackageCount; i++)
-            {
-                pack = ActiveProfile.Packages[i];
+			for (int i = 0; i < ActiveProfile.PackageCount; i++)
+			{
+				if (ActiveProfile.Packages[i].IsInstalled)
+				{
+					enabled_package_list.Items.Add(ActiveProfile.Packages[i].Name);
+				}
+				else
+				{
+					disabled_package_list.Items.Add(ActiveProfile.Packages[i].Name);
+				}
+			}
+		}
 
-                if (pack.IsInstalled)
-                {
-                    enabled_package_list.Items.Add(pack.Name);
-                }
-                else
-                {
-                    disabled_package_list.Items.Add(pack.Name);
-                }
-            }
-        }
+		public static void UpdateProfileFile()
+		{
+			ActiveProfile.WriteJSON(PathToActiveProfile);
+		}
 
-        public void UpdateActiveProfile(Profile p)
-        {
-            ActiveProfile = p;
+		public void RefreshActiveProfileFromJSON()
+		{
+			UpdateActiveProfile(Profile.ReadJSON(PathToActiveProfile));
+		}
 
-            //TODELETE
-            ModPackage t1 = new ModPackage("test1", "mj0331", "Test mod #1");
-            ModPackage t2 = new ModPackage("test2", "mj0331", "Test mod #2");
+		public void UpdateActiveProfile(Profile p)
+		{
+			ActiveProfile = p;
+			
 
-            ActiveProfile.AddPackage(t1);
-            ActiveProfile.AddPackage(t2);
+			this.Text = "Mod Manager - " + p.GameName;
+			profile_label.Text = p.GameName;
 
-            this.Text = "Mod Manager - " + p.GameName;
-            profile_label.Text = p.GameName;
+			UpdatePackageLists();
+			UpdateProfileFile();
+		}
 
-            UpdatePackageLists();
-        }
+		public bool IsProfileLoaded()
+		{
+			if(ActiveProfile.GameName == "")
+			{
+				MessageBox.Show("No profile loaded!", "Error");
+				return false;
+			}
 
-        private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            open_profile_dialog.ShowDialog();
-            Stream s = open_profile_dialog.OpenFile();
-            StreamReader sr = new StreamReader(s);
+			return true;
+		}
 
-            UpdateActiveProfile(Profile.FromJSON(sr.ReadToEnd()));
+		private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			open_profile_dialog.ShowDialog();
+			Stream s = open_profile_dialog.OpenFile();
+			StreamReader sr = new StreamReader(s);
+			Profile p = Profile.FromJSON(sr.ReadToEnd());
+			sr.Close();
+			s.Close();
 
-            s.Close();
-        }
+			PathToActiveProfile = Path.GetDirectoryName(open_profile_dialog.FileName);
+			UpdateActiveProfile(p);
+		}
 
-        private void aboutThisProfileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("About this profile: \n\n" + ActiveProfile.About());
-        }
+		private void aboutThisProfileToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("About this profile: \n\n" + ActiveProfile.About());
+		}
 
+		private void SetSelectedPackage(ModPackage p)
+		{
+			SelectedPackage = p;
+			UpdatePackageInfo(SelectedPackage);
+		}
 
+		private void disabled_package_list_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			disabled_package_list.Select();
+			if(disabled_package_list.SelectedItem != null)
+			{
+				SetSelectedPackage(ActiveProfile.Search(disabled_package_list.SelectedItem.ToString()));
+			}
+		}
 
-        private void disabled_package_list_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            disabled_package_list.Select();
-            if(disabled_package_list.SelectedItem != null)
-            {
-                UpdatePackageInfo(ActiveProfile.Search(disabled_package_list.SelectedItem.ToString()));
-            }
-        }
-
-        private void enabled_package_list_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            enabled_package_list.Select();
-            if(enabled_package_list.SelectedItem != null)
-            {
-                UpdatePackageInfo(ActiveProfile.Search(enabled_package_list.SelectedItem.ToString()));
-            }
-        }
-
-
-
-        private void enable_selected_button_Click(object sender, EventArgs e)
-        {
-            
-            if (disabled_package_list.SelectedItem != null)
-            {
-                ActiveProfile.Search(disabled_package_list.SelectedItem.ToString()).Install(ActiveProfile);
-                UpdatePackageLists();
-            }           
-        }
-
-        private void disable_selected_button_Click(object sender, EventArgs e)
-        {
-            if(enabled_package_list.SelectedItem != null)
-            {
-                ActiveProfile.Search(enabled_package_list.SelectedItem.ToString()).Uninstall(ActiveProfile);
-                UpdatePackageLists();
-            }  
-        }
-
+		private void enabled_package_list_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			enabled_package_list.Select();
+			if(enabled_package_list.SelectedItem != null)
+			{
+				SetSelectedPackage(ActiveProfile.Search(enabled_package_list.SelectedItem.ToString()));
+			}
+		}
 
 
-        private void enable_all_button_Click(object sender, EventArgs e)
-        {
-            ModPackage pack;
 
-            for (int i = 0; i < ActiveProfile.PackageCount; i++)
-            {
-                pack = ActiveProfile.Packages[i];
-                pack.Install(ActiveProfile);
-            }
+		private void enable_selected_button_Click(object sender, EventArgs e)
+		{
+			if (disabled_package_list.SelectedItem != null)
+			{
+				ModPackage pack = ActiveProfile.Search(disabled_package_list.SelectedItem.ToString());
+				if(pack == null)
+				{
+					MessageBox.Show("Cannot find mod package '" + disabled_package_list.SelectedItem + "'!");
+				}
+				else
+				{
+					//Install each mod in the mod package
+					pack.Install(ActiveProfile);
 
-            UpdatePackageLists();
-        }
+					//Update the profile after install is done
+					ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
+					ActiveProfile.WriteJSON(PathToActiveProfile);
+					UpdatePackageLists();
+					MessageBox.Show("Done installing '" + pack.Name + "'.");
+				}
+			}           
+		}
 
-        private void disable_all_button_Click(object sender, EventArgs e)
-        {
-            ModPackage pack;
+		private void disable_selected_button_Click(object sender, EventArgs e)
+		{
+			if(enabled_package_list.SelectedItem != null)
+			{
+				ModPackage pack = ActiveProfile.Search(enabled_package_list.SelectedItem.ToString());
+				if (pack == null)
+				{
+					MessageBox.Show("Cannot find mod package '" + enabled_package_list.SelectedItem + "'!");
+				}
+				else
+				{
+					//Uninstall each mod in the mod package
+					pack.Uninstall(ActiveProfile);
 
-            for (int i = 0; i < ActiveProfile.PackageCount; i++)
-            {
-                pack = ActiveProfile.Packages[i];
-                pack.Uninstall(ActiveProfile);
-            }
+					//Update the profile after uninstall is done
+					ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
+					ActiveProfile.WriteJSON(PathToActiveProfile);
+					UpdatePackageLists();
+					MessageBox.Show("Done uninstalling '" + pack.Name + "'.");
+				}
+			}  
+		}
 
-            UpdatePackageLists();
-        }
-    }
+
+
+		private void enable_all_button_Click(object sender, EventArgs e)
+		{
+			ModPackage pack;
+			int pack_count = 0;
+
+			for (int i = 0; i < ActiveProfile.PackageCount; i++)
+			{
+				pack = ActiveProfile.Packages[i];
+
+				if(!pack.IsInstalled)
+				{
+					pack.Install(ActiveProfile);
+					pack_count++;
+				}
+			}
+			ActiveProfile.WriteJSON(PathToActiveProfile);
+			UpdatePackageLists();
+			MessageBox.Show("Done installing " + pack_count + " packages. " + (ActiveProfile.PackageCount - pack_count) + " already installed.");
+		}
+
+		private void disable_all_button_Click(object sender, EventArgs e)
+		{
+
+			ModPackage pack;
+			int pack_count = 0;
+
+			for (int i = 0; i < ActiveProfile.PackageCount; i++)
+			{
+				pack = ActiveProfile.Packages[i];
+
+				if (pack.IsInstalled)
+				{
+					pack.Uninstall(ActiveProfile);
+					pack_count++;
+				}
+			}
+			ActiveProfile.WriteJSON(PathToActiveProfile);
+			UpdatePackageLists();
+			MessageBox.Show("Done uninstalling " + pack_count + " packages. " + (ActiveProfile.PackageCount - pack_count) + " already uninstalled.");
+		}
+
+		private void createNewPackageToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(IsProfileLoaded())
+			{
+				PackageEditorForm PackageEditor = new PackageEditorForm();
+				PackageEditor.ShowDialog();
+				RefreshActiveProfileFromJSON();
+			}
+		}
+
+		private void openSelectedPackageInEditorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(IsProfileLoaded())
+			{
+				if(SelectedPackage == null || SelectedPackage.Name == "")
+				{
+					MessageBox.Show("Please select a package to open!", "Error");
+				}
+				else
+				{
+					PackageEditorForm PackageEditor = new PackageEditorForm(SelectedPackage);
+					PackageEditor.Show();
+				}               
+			}
+		}
+
+		private void addPackageToProfileToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(IsProfileLoaded())
+			{
+				if(open_profile_dialog.ShowDialog() == DialogResult.OK)
+				{
+					ModPackage pack = ModPackage.FromJSON(open_profile_dialog.FileName);
+					if (pack == null)
+					{
+						MessageBox.Show("Error creating ModPackage object from file!", "Error");
+					}
+					else
+					{
+						if (ActiveProfile.HasDuplicate(pack))
+						{
+							MessageBox.Show("The mod you are trying to add to your profile is already added!");
+						}
+						else
+						{
+							pack.IsInstalled = false;
+							pack.BackupIfNeeded(ActiveProfile);
+							ActiveProfile.AddPackage(pack);
+							UpdateActiveProfile(ActiveProfile);
+						}
+					}
+				}
+			}
+		}
+
+		private void removePackageFromProfileToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(IsProfileLoaded())
+			{
+				if(SelectedPackage != null || SelectedPackage.Name != "")
+				{
+					ActiveProfile.RemovePackage(SelectedPackage);
+					UpdateActiveProfile(ActiveProfile);
+				}
+			}
+		}
+
+		private void makeTNTArchiveFromJSONManifestToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(open_manifest_dialog.ShowDialog() == DialogResult.OK)
+			{
+				Utils.MakeTNTArchiveFromManifest(open_manifest_dialog.FileName);
+				MessageBox.Show("Created archive at:\n" + Utils.GetLastDirectory(Utils.GetLastDirectory(open_manifest_dialog.FileName)));
+			}
+		}
+
+		private void addPackageToProfileFromTNTArchiveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(IsProfileLoaded())
+			{
+				if (open_tnt_dialog.ShowDialog() == DialogResult.OK)
+				{
+					ModPackage pack = Utils.ExtractTNTArchive(open_tnt_dialog.FileName, ActiveProfile);
+
+					if(pack == null)
+					{
+						MessageBox.Show("Error creating ModPackage from TNT archive!");
+					}
+					else
+					{
+						if(ActiveProfile.HasDuplicate(pack))
+						{
+							MessageBox.Show("The mod you are trying to add to your profile is already added!");
+						}
+						else
+						{
+							pack.IsInstalled = false;
+							pack.BackupIfNeeded(ActiveProfile);
+							ActiveProfile.AddPackage(pack);
+							UpdateActiveProfile(ActiveProfile);
+						}
+					}
+				}
+			}			
+		}
+	}
 }
