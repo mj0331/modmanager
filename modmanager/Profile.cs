@@ -19,23 +19,8 @@ namespace modmanager
 		public int PackageCount;
 		public ModPackage[] Packages;
 
-<<<<<<< HEAD
-		public Profile(string game_name, string game_path, string backup_root, int ff_version = Profile.LatestFileFormatVersion)
-		{
-			GameName = game_name;
-			GamePath = game_path;
-			BackupRoot = backup_root;
-			FileFormatVersion = ff_version;
 
-			PackageCount = 0;
-			Packages = new ModPackage[PackageCount];
-			
-		}
-
-		public string GetBackupRoot()
-=======
 		public Profile(string game_name, string game_path, string mod_path, string backup_root, int ff_version = Profile.LatestFileFormatVersion)
->>>>>>> refs/remotes/origin/dev
 		{
 			GameName = game_name;
 			GamePath = game_path;
@@ -91,8 +76,7 @@ namespace modmanager
 
 		}
 
-<<<<<<< HEAD
-=======
+
 		//Returns true if mod existed and has been deleted, false otherwise
 		public bool RemovePackage(ModPackage pack)
 		{
@@ -118,7 +102,6 @@ namespace modmanager
 			return replace;
 		}
 
->>>>>>> refs/remotes/origin/dev
 		public ModPackage Search(string name)
 		{
 			for(int i = 0; i < PackageCount; i++)
@@ -128,11 +111,6 @@ namespace modmanager
 					return Packages[i];
 				}
 			}
-
-<<<<<<< HEAD
-			return new ModPackage("", "", "");
-		}
-=======
 			return null;
 		}
 
@@ -184,7 +162,6 @@ namespace modmanager
 					}
 				}
 			}
-
 			return isOriginal;
 		}
 
@@ -209,8 +186,6 @@ namespace modmanager
 			}
 			return false;
 		}
-
->>>>>>> refs/remotes/origin/dev
 	}
 }
 

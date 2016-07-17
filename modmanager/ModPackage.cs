@@ -13,33 +13,14 @@ namespace modmanager
 		public string Description;
 		public bool IsInstalled;
 
-<<<<<<< HEAD
-		public List<Mod> Mods;
-=======
 		public int ModCount;
 		public Mod[] Mods;
->>>>>>> refs/remotes/origin/dev
 
 		public ModPackage(string name, string author, string description, bool isInstalled = false)
 		{
 			Name = name;
 			Author = author;
 			Description = description;
-<<<<<<< HEAD
-			IsInstalled = false;
-		}
-
-		public void Install(Profile p)
-		{
-			//TODO: Implement acctual install code
-			IsInstalled = true;
-		}
-
-		public void Uninstall(Profile p)
-		{
-			//TODO: Implement acctual uninstall code
-			IsInstalled = false;
-=======
 			IsInstalled = isInstalled;
 
 			ModCount = 0;
@@ -177,7 +158,6 @@ namespace modmanager
 				}
 				
 			}
->>>>>>> refs/remotes/origin/dev
 		}
 	}
 }
