@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace modmanager
 {
@@ -76,13 +77,24 @@ namespace modmanager
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			switch(comboBox1.SelectedText)
+			switch(comboBox1.SelectedItem.ToString())
 			{
 				case "Replacement":
 					ActiveMod.ModType = Mod.Type.Replacement;
+					string filename = Path.GetFileName(target_path.Text);
+					if (!File.Exists(filename))
+					{
+						target_path.Text = ActiveMod.TargetFile;
+					}
+
 					break;
 				case "Addition":
 					ActiveMod.ModType = Mod.Type.Addition;
+					if (Path.GetFileName(target_path.Text) != string.Empty)
+					{
+						target_path.Text = Utils.GetLastDirectory(ActiveMod.TargetFile);
+					}
+
 					break;
 				default:
 					break;
@@ -91,6 +103,9 @@ namespace modmanager
 
 		private void mod_confirm_Click(object sender, EventArgs e)
 		{
+			ActiveMod.TargetFile = target_path.Text;
+			ActiveMod.ModdedFile = modded_path.Text;
+
 			DialogResult = DialogResult.OK;
 			Hide();
 		}

@@ -20,7 +20,7 @@ namespace modmanager
 				//Extract the part starting at the root
 				int common_length = start_index + root.Length;
 				string relative_path = full_path.Substring(common_length, full_path.Length - common_length);
-				return relative_path;
+				return relative_path.TrimStart('\\');
 			}
 			else
 			{

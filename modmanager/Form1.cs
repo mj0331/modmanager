@@ -147,15 +147,9 @@ namespace modmanager
 				else
 				{
 					//Install each mod in the mod package
-					//for(int i = 0; i < pack.ModCount; i++)
-					//{
-					//	pack.Mods[i].Install(ActiveProfile, pack);
-					//}
 					pack.Install(ActiveProfile);
 
 					//Update the profile after install is done
-					//pack.IsInstalled = true;
-
 					ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
 					ActiveProfile.WriteJSON(PathToActiveProfile);
 					UpdatePackageLists();

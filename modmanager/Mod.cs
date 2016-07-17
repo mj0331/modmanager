@@ -53,6 +53,7 @@ namespace modmanager
 					ReplaceInstall(p, pack);
 					break;
 				case Type.Addition:
+					AdditionInstall(p, pack);
 					break;
 				default:
 					MessageBox.Show("Unknown mod procedure code: " + ModType);
@@ -69,6 +70,7 @@ namespace modmanager
 					ReplaceUninstall(p, pack);
 					break;
 				case Type.Addition:
+					AdditionUninstall(p, pack);
 					break;
 				default:
 					MessageBox.Show("Unknown mod procedure code: " + ModType);
@@ -104,6 +106,36 @@ namespace modmanager
 			catch (Exception e)
 			{
 				MessageBox.Show("Error copying backup file into the game files!\n\nFROM:" + backup + "\nTO:" + target + "\n\n" + e.Message);
+			}
+		}
+
+		//N.B.: As of now, this is the same as ReplaceInstall, but the install logic may change in the future, so this stays
+		void AdditionInstall(Profile p, ModPackage pack)
+		{
+			string target = Path.Combine(p.GamePath, TargetFile, Path.GetFileName(ModdedFile));
+			string mod = Path.Combine(p.ModPath, pack.Name, ModdedFile);
+
+			try
+			{
+				File.Copy(mod, target, true);
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Error copying modded file into the game files!\n\nFROM:" + mod + "\nTO:" + target + "\n\n" + e.Message);
+			}
+		}
+
+		void AdditionUninstall(Profile p, ModPackage pack)
+		{
+			string target = Path.Combine(p.GamePath, TargetFile, Path.GetFileName(ModdedFile));
+
+			try
+			{
+				File.Delete(target);
+			}
+			catch(Exception e)
+			{
+				MessageBox.Show("Error deleting modded file from the game files!\n\nFROM:" + target + "\n\n" + e.Message);
 			}
 		}
 	}
