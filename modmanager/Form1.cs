@@ -147,16 +147,19 @@ namespace modmanager
 				else
 				{
 					//Install each mod in the mod package
-					for(int i = 0; i < pack.ModCount; i++)
-					{
-						pack.Mods[i].Install(ActiveProfile, pack);
-					}
+					//for(int i = 0; i < pack.ModCount; i++)
+					//{
+					//	pack.Mods[i].Install(ActiveProfile, pack);
+					//}
+					pack.Install(ActiveProfile);
 
 					//Update the profile after install is done
-					pack.IsInstalled = true;
+					//pack.IsInstalled = true;
+
 					ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
 					ActiveProfile.WriteJSON(PathToActiveProfile);
 					UpdatePackageLists();
+					MessageBox.Show("Done installing '" + pack.Name + "'.");
 				}
 			}           
 		}
@@ -173,16 +176,13 @@ namespace modmanager
 				else
 				{
 					//Uninstall each mod in the mod package
-					for (int i = 0; i < pack.ModCount; i++)
-					{
-						pack.Mods[i].Uninstall(ActiveProfile, pack);
-					}
+					pack.Uninstall(ActiveProfile);
 
 					//Update the profile after uninstall is done
-					pack.IsInstalled = false;
 					ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
 					ActiveProfile.WriteJSON(PathToActiveProfile);
 					UpdatePackageLists();
+					MessageBox.Show("Done uninstalling '" + pack.Name + "'.");
 				}
 			}  
 		}
@@ -192,27 +192,42 @@ namespace modmanager
 		private void enable_all_button_Click(object sender, EventArgs e)
 		{
 			ModPackage pack;
+			int pack_count = 0;
 
 			for (int i = 0; i < ActiveProfile.PackageCount; i++)
 			{
 				pack = ActiveProfile.Packages[i];
-				pack.Install(ActiveProfile);
-			}
 
+				if(!pack.IsInstalled)
+				{
+					pack.Install(ActiveProfile);
+					pack_count++;
+				}
+			}
+			ActiveProfile.WriteJSON(PathToActiveProfile);
 			UpdatePackageLists();
+			MessageBox.Show("Done installing " + pack_count + " packages. " + (ActiveProfile.PackageCount - pack_count) + " already installed.");
 		}
 
 		private void disable_all_button_Click(object sender, EventArgs e)
 		{
+
 			ModPackage pack;
+			int pack_count = 0;
 
 			for (int i = 0; i < ActiveProfile.PackageCount; i++)
 			{
 				pack = ActiveProfile.Packages[i];
-				pack.Uninstall(ActiveProfile);
-			}
 
+				if (pack.IsInstalled)
+				{
+					pack.Uninstall(ActiveProfile);
+					pack_count++;
+				}
+			}
+			ActiveProfile.WriteJSON(PathToActiveProfile);
 			UpdatePackageLists();
+			MessageBox.Show("Done uninstalling " + pack_count + " packages. " + (ActiveProfile.PackageCount - pack_count) + " already uninstalled.");
 		}
 
 		private void createNewPackageToolStripMenuItem_Click(object sender, EventArgs e)

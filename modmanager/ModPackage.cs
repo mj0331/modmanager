@@ -36,13 +36,21 @@ namespace modmanager
 
 		public void Install(Profile p)
 		{
-			//TODO: Implement acctual install code
+			for (int i = 0; i < ModCount; i++)
+			{
+				Mods[i].Install(p, this);
+			}
+
 			IsInstalled = true;
 		}
 
 		public void Uninstall(Profile p)
 		{
-			//TODO: Implement acctual uninstall code
+			for (int i = 0; i < ModCount; i++)
+			{
+				Mods[i].Uninstall(p, this);
+			}
+
 			IsInstalled = false;
 		}
 
