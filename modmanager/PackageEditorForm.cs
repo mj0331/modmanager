@@ -134,5 +134,33 @@ namespace modmanager
 				}
 			}
 		}
+
+		private void newPackageToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Target = new ModPackage("", "", "");
+			UpdateDisplayData();
+		}
+
+		private void loadPackageToolStripMenuItem_Click_1(object sender, EventArgs e)
+		{
+			try
+			{
+				if(openFileDialog1.ShowDialog() == DialogResult.OK)
+				{
+					Target = ModPackage.FromJSON(openFileDialog1.FileName);
+
+					if(Target.Name == null)
+					{
+						throw new Exception("Cannot create ModPackage object from the selected file. Make sure you select a vaild package manifest!");
+					}
+
+					UpdateDisplayData();
+				}
+			}
+			catch(Exception err)
+			{
+				MessageBox.Show("Error opening file:\n\n" + err.Message);
+			}
+		}
 	}
 }
