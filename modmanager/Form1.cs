@@ -93,15 +93,28 @@ namespace modmanager
 
 		private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			open_profile_dialog.ShowDialog();
-			Stream s = open_profile_dialog.OpenFile();
-			StreamReader sr = new StreamReader(s);
-			Profile p = Profile.FromJSON(sr.ReadToEnd());
-			sr.Close();
-			s.Close();
+			try
+			{
+				if (open_profile_dialog.ShowDialog() == DialogResult.OK)
+				{
+					Stream s = open_profile_dialog.OpenFile();
+					StreamReader sr = new StreamReader(s);
+					Profile p = Profile.FromJSON(sr.ReadToEnd());
+					sr.Close();
+					s.Close();
 
-			PathToActiveProfile = Path.GetDirectoryName(open_profile_dialog.FileName);
-			UpdateActiveProfile(p);
+					if(p.GameName == null)
+					{
+						throw new Exception("Invalid profile file!");
+					}
+
+					PathToActiveProfile = Path.GetDirectoryName(open_profile_dialog.FileName);
+					UpdateActiveProfile(p);
+				}
+			}catch(Exception err)
+			{
+				MessageBox.Show("Error opening profile file:\n\n" + err.Message);
+			}
 		}
 
 		private void aboutThisProfileToolStripMenuItem_Click(object sender, EventArgs e)
