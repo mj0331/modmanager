@@ -30,7 +30,7 @@ namespace modmanager
 		private void createProfileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			CreateProfileForm create_profile_form = new CreateProfileForm();
-			create_profile_form.Show();
+			create_profile_form.ShowDialog();
 		}
 
 		public void UpdatePackageInfo(ModPackage pack)
@@ -93,15 +93,28 @@ namespace modmanager
 
 		private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			open_profile_dialog.ShowDialog();
-			Stream s = open_profile_dialog.OpenFile();
-			StreamReader sr = new StreamReader(s);
-			Profile p = Profile.FromJSON(sr.ReadToEnd());
-			sr.Close();
-			s.Close();
+			try
+			{
+				if (open_profile_dialog.ShowDialog() == DialogResult.OK)
+				{
+					Stream s = open_profile_dialog.OpenFile();
+					StreamReader sr = new StreamReader(s);
+					Profile p = Profile.FromJSON(sr.ReadToEnd());
+					sr.Close();
+					s.Close();
 
-			PathToActiveProfile = Path.GetDirectoryName(open_profile_dialog.FileName);
-			UpdateActiveProfile(p);
+					if(p.GameName == null)
+					{
+						throw new Exception("Invalid profile file!");
+					}
+
+					PathToActiveProfile = Path.GetDirectoryName(open_profile_dialog.FileName);
+					UpdateActiveProfile(p);
+				}
+			}catch(Exception err)
+			{
+				MessageBox.Show("Error opening profile file:\n\n" + err.Message);
+			}
 		}
 
 		private void aboutThisProfileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -229,8 +242,10 @@ namespace modmanager
 			if(IsProfileLoaded())
 			{
 				PackageEditorForm PackageEditor = new PackageEditorForm();
-				PackageEditor.ShowDialog();
-				RefreshActiveProfileFromJSON();
+				if(PackageEditor.ShowDialog() == DialogResult.OK)
+				{
+					RefreshActiveProfileFromJSON();
+				}				
 			}
 		}
 
@@ -285,8 +300,15 @@ namespace modmanager
 			{
 				if(SelectedPackage != null || SelectedPackage.Name != "")
 				{
-					ActiveProfile.RemovePackage(SelectedPackage);
-					UpdateActiveProfile(ActiveProfile);
+					if(MessageBox.Show("Are you sure you want to remove the mod package? This will also delete the mod from the mods folder!", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+					{
+						if (!ActiveProfile.RemovePackage(SelectedPackage))
+						{
+							MessageBox.Show("Something went wrong :(");
+						}
+
+						UpdateActiveProfile(ActiveProfile);
+					}
 				}
 			}
 		}

@@ -97,9 +97,24 @@ namespace modmanager
 			if(replace)
 			{
 				PackageCount--;
+				string dir_path = Path.Combine(ModPath, pack.Name);
+				return DeleteModFolder(dir_path);
 			}
 
 			return replace;
+		}
+
+		private bool DeleteModFolder(string folder_path)
+		{
+			try
+			{
+				Directory.Delete(folder_path, true);
+				return true;
+			}
+			catch(Exception e)
+			{
+				return false;
+			}
 		}
 
 		public ModPackage Search(string name)

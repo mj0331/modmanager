@@ -49,6 +49,7 @@
 			this.button1 = new System.Windows.Forms.Button();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -79,12 +80,14 @@
 			this.newPackageToolStripMenuItem.Name = "newPackageToolStripMenuItem";
 			this.newPackageToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
 			this.newPackageToolStripMenuItem.Text = "New Package";
+			this.newPackageToolStripMenuItem.Click += new System.EventHandler(this.newPackageToolStripMenuItem_Click);
 			// 
 			// loadPackageToolStripMenuItem
 			// 
 			this.loadPackageToolStripMenuItem.Name = "loadPackageToolStripMenuItem";
 			this.loadPackageToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
 			this.loadPackageToolStripMenuItem.Text = "Open Package From Manifest";
+			this.loadPackageToolStripMenuItem.Click += new System.EventHandler(this.loadPackageToolStripMenuItem_Click_1);
 			// 
 			// toolStripSeparator1
 			// 
@@ -221,6 +224,10 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
+			// openFileDialog1
+			// 
+			this.openFileDialog1.FileName = "openFileDialog1";
+			// 
 			// PackageEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,5 +280,6 @@
         private System.Windows.Forms.ToolStripMenuItem savePackageExistingManifestToolStripMenuItem;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-    }
+		private System.Windows.Forms.OpenFileDialog openFileDialog1;
+	}
 }
