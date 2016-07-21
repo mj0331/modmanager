@@ -300,8 +300,15 @@ namespace modmanager
 			{
 				if(SelectedPackage != null || SelectedPackage.Name != "")
 				{
-					ActiveProfile.RemovePackage(SelectedPackage);
-					UpdateActiveProfile(ActiveProfile);
+					if(MessageBox.Show("Are you sure you want to remove the mod package? This will also delete the mod from the mods folder!", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+					{
+						if (!ActiveProfile.RemovePackage(SelectedPackage))
+						{
+							MessageBox.Show("Something went wrong :(");
+						}
+
+						UpdateActiveProfile(ActiveProfile);
+					}
 				}
 			}
 		}
