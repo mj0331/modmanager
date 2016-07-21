@@ -30,7 +30,7 @@ namespace modmanager
 		private void createProfileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			CreateProfileForm create_profile_form = new CreateProfileForm();
-			create_profile_form.Show();
+			create_profile_form.ShowDialog();
 		}
 
 		public void UpdatePackageInfo(ModPackage pack)
@@ -242,8 +242,10 @@ namespace modmanager
 			if(IsProfileLoaded())
 			{
 				PackageEditorForm PackageEditor = new PackageEditorForm();
-				PackageEditor.ShowDialog();
-				RefreshActiveProfileFromJSON();
+				if(PackageEditor.ShowDialog() == DialogResult.OK)
+				{
+					RefreshActiveProfileFromJSON();
+				}				
 			}
 		}
 
