@@ -68,3 +68,18 @@ This is a bit of a lengthy process as each individual file you alter/add needs t
   
 ###__Create the .TNT archive__
   From the main mod manager window, go to *Mod Packages* -> *Make .TNT Archive From .JSON Manifest* and browse for the manifest file you've created earlier. It will now create your .TNT archive in the folder above your mod folder. **Congratulations on creating your packaged mod!**
+
+#Changelog
+
+###v0.2 - Bug fixes and QoL improvements
+  + Enabled the *New Package* and *Open Package Manifest* buttons in the package editor.
+  + Added exception handling and error messages when loading profile files and mod manifests
+  + Fixed issue #5: *Exception crashed the mod manager after the package editor is closed.*
+  + Fixed issue #4: *When a ModPackage is removed from profile, the folder is not deleted*
+  + Fixed issue #1: *NullReference Exception crashes the editor after a ModPackage target file update* (Unable to reproduce issue)
+  
+### v0.1 - Initial release
+  + Ability to toggle mods On/Off
+  + Ability to install mods from .TNT archives and raw .JSON manifests
+  + Ability to create own mods via the package and mod editors
+  
