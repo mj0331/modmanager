@@ -32,10 +32,10 @@ namespace modmanager
 			
 		}
 
-		public void WriteJSON(string profile_file_path)
+		public void WriteJSON(string profileFileDir)
 		{
 			string profile_json = JsonConvert.SerializeObject(this, Formatting.Indented);
-			string profile_file = Path.Combine(profile_file_path, GameName + ".json");
+			string profile_file = Path.Combine(profileFileDir, GameName + ".json");
 
 			File.WriteAllText(profile_file, profile_json);
 		}

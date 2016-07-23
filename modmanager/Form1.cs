@@ -25,6 +25,18 @@ namespace modmanager
 			open_profile_dialog.CheckFileExists = true;
 			open_profile_dialog.CheckPathExists = true;
 			open_profile_dialog.Filter = "JSON Files|*.json";
+
+			//Reload last profile from file if possible
+			if(File.Exists("lastsession"))
+			{
+				string session_path = File.ReadAllText("lastsession");
+				if(session_path != null || session_path != "")
+				{
+					Profile p = Profile.ReadJSON(session_path);
+					PathToActiveProfile = Utils.GetLastDirectory(session_path);
+					UpdateActiveProfile(p);
+				}
+			}
 		}
 
 		private void createProfileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -65,7 +77,7 @@ namespace modmanager
 
 		public void RefreshActiveProfileFromJSON()
 		{
-			UpdateActiveProfile(Profile.ReadJSON(PathToActiveProfile));
+			UpdateActiveProfile(Profile.ReadJSON(Path.Combine(PathToActiveProfile, ActiveProfile.GameName + ".json")));
 		}
 
 		public void UpdateActiveProfile(Profile p)
@@ -109,6 +121,10 @@ namespace modmanager
 					}
 
 					PathToActiveProfile = Path.GetDirectoryName(open_profile_dialog.FileName);
+
+					//Save profile path so it can be automatically loaded next time the mod manager starts
+					File.WriteAllText("lastsession", Path.Combine(PathToActiveProfile, p.GameName + ".json"));
+
 					UpdateActiveProfile(p);
 				}
 			}catch(Exception err)
