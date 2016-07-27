@@ -71,6 +71,13 @@ This is a bit of a lengthy process as each individual file you alter/add needs t
 
 #Changelog
 
+###v0.3 - More AntiStupid
+  + The menu bar is less of an eye sore. It is now white text over dark grey background
+  + The mod manager now reloads the profile you had opened last time you ran the program
+  + Additional exception handling for adding mod packages to profile
+  + The mod manager now detects if you try to install a mod that conflicts(affects the same file) with a mod already enabled and will prevent the installation of the new one.
+  + Fixed issue #6: *Cannot install mods if the game is on a different drive*
+
 ###v0.2 - Bug fixes and QoL improvements
   + Enabled the *New Package* and *Open Package Manifest* buttons in the package editor.
   + Added exception handling and error messages when loading profile files and mod manifests
