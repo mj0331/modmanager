@@ -340,32 +340,39 @@ namespace modmanager
 
 		private void addPackageToProfileFromTNTArchiveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if(IsProfileLoaded())
+			try
 			{
-				if (open_tnt_dialog.ShowDialog() == DialogResult.OK)
+				if (IsProfileLoaded())
 				{
-					ModPackage pack = Utils.ExtractTNTArchive(open_tnt_dialog.FileName, ActiveProfile);
+					if (open_tnt_dialog.ShowDialog() == DialogResult.OK)
+					{
+						ModPackage pack = Utils.ExtractTNTArchive(open_tnt_dialog.FileName, ActiveProfile);
 
-					if(pack == null)
-					{
-						MessageBox.Show("Error creating ModPackage from TNT archive!");
-					}
-					else
-					{
-						if(ActiveProfile.HasDuplicate(pack))
+						if (pack == null)
 						{
-							MessageBox.Show("The mod you are trying to add to your profile is already added!");
+							throw new Exception("Error creating ModPackage from TNT archive!");
 						}
 						else
 						{
-							pack.IsInstalled = false;
-							pack.BackupIfNeeded(ActiveProfile);
-							ActiveProfile.AddPackage(pack);
-							UpdateActiveProfile(ActiveProfile);
+							if (ActiveProfile.HasDuplicate(pack))
+							{
+								throw new Exception("The mod you are trying to add to your profile is already added!");
+							}
+							else
+							{
+								pack.IsInstalled = false;
+								pack.BackupIfNeeded(ActiveProfile);
+								ActiveProfile.AddPackage(pack);
+								UpdateActiveProfile(ActiveProfile);
+							}
 						}
 					}
 				}
-			}			
+			}	
+			catch(Exception err)
+			{
+				MessageBox.Show("Error adding mod to profile: \n\n" + err.Message);
+			}		
 		}
 	}
 }

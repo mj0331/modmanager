@@ -343,6 +343,8 @@
             // 
             // selected_package_description
             // 
+            this.selected_package_description.AcceptsTab = true;
+            this.selected_package_description.AllowDrop = true;
             this.selected_package_description.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selected_package_description.Location = new System.Drawing.Point(741, 170);
             this.selected_package_description.Margin = new System.Windows.Forms.Padding(4);
@@ -350,7 +352,7 @@
             this.selected_package_description.Name = "selected_package_description";
             this.selected_package_description.ReadOnly = true;
             this.selected_package_description.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.selected_package_description.Size = new System.Drawing.Size(500, 419);
+            this.selected_package_description.Size = new System.Drawing.Size(500, 407);
             this.selected_package_description.TabIndex = 14;
             // 
             // open_manifest_dialog
@@ -365,6 +367,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1259, 617);
             this.Controls.Add(this.selected_package_description);

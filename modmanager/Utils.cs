@@ -88,7 +88,7 @@ namespace modmanager
 			}
 			catch (IOException e)
 			{
-				System.Windows.Forms.MessageBox.Show("Error creating folder for the mod. Is the mod already installed?\n____________________\n\n" + e);
+				throw new Exception("Error creating folder for the mod. Is the mod already installed?\n____________________\n\n" + e);
 			}
 
 			return pack;
