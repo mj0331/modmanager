@@ -175,14 +175,23 @@ namespace modmanager
 				}
 				else
 				{
-					//Install each mod in the mod package
-					pack.Install(ActiveProfile);
+					//Check for conflicts
+					string conflicting_mod;
+					if(ActiveProfile.IsConflictingWithInstalled(pack, out conflicting_mod))
+					{
+						MessageBox.Show("This mod is conflicting with '" + conflicting_mod + "'.If you wish to install this mod, uninstall '" + conflicting_mod + "' first!\nInstallation canceled!");
+					}
+					else
+					{
+						//Install each mod in the mod package
+						pack.Install(ActiveProfile);
 
-					//Update the profile after install is done
-					ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
-					ActiveProfile.WriteJSON(PathToActiveProfile);
-					UpdatePackageLists();
-					MessageBox.Show("Done installing '" + pack.Name + "'.");
+						//Update the profile after install is done
+						ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
+						ActiveProfile.WriteJSON(PathToActiveProfile);
+						UpdatePackageLists();
+						MessageBox.Show("Done installing '" + pack.Name + "'.");
+					}
 				}
 			}           
 		}

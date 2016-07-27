@@ -181,7 +181,7 @@ namespace modmanager
 		}
 
 		//Check if one of the mods in the pack in targeting the same file as an existing pack
-		public bool IsConflictingWithInstalled(ModPackage p)
+		public bool IsConflictingWithInstalled(ModPackage p, out string conflicting_mod_name)
 		{
 			for(int i = 0; i < PackageCount; i++)
 			{
@@ -193,12 +193,14 @@ namespace modmanager
 						{
 							if (p.Mods[k].TargetFile == Packages[i].Mods[j].TargetFile)
 							{
+								conflicting_mod_name = Packages[i].Name;
 								return true;
 							}
 						}
 					}
 				}
 			}
+			conflicting_mod_name = "";
 			return false;
 		}
 
