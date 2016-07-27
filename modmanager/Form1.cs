@@ -25,6 +25,18 @@ namespace modmanager
 			open_profile_dialog.CheckFileExists = true;
 			open_profile_dialog.CheckPathExists = true;
 			open_profile_dialog.Filter = "JSON Files|*.json";
+
+			//Reload last profile from file if possible
+			if(File.Exists("lastsession"))
+			{
+				string session_path = File.ReadAllText("lastsession");
+				if(session_path != null || session_path != "")
+				{
+					Profile p = Profile.ReadJSON(session_path);
+					PathToActiveProfile = Utils.GetLastDirectory(session_path);
+					UpdateActiveProfile(p);
+				}
+			}
 		}
 
 		private void createProfileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -65,7 +77,7 @@ namespace modmanager
 
 		public void RefreshActiveProfileFromJSON()
 		{
-			UpdateActiveProfile(Profile.ReadJSON(PathToActiveProfile));
+			UpdateActiveProfile(Profile.ReadJSON(Path.Combine(PathToActiveProfile, ActiveProfile.GameName + ".json")));
 		}
 
 		public void UpdateActiveProfile(Profile p)
@@ -109,6 +121,10 @@ namespace modmanager
 					}
 
 					PathToActiveProfile = Path.GetDirectoryName(open_profile_dialog.FileName);
+
+					//Save profile path so it can be automatically loaded next time the mod manager starts
+					File.WriteAllText("lastsession", Path.Combine(PathToActiveProfile, p.GameName + ".json"));
+
 					UpdateActiveProfile(p);
 				}
 			}catch(Exception err)
@@ -159,14 +175,23 @@ namespace modmanager
 				}
 				else
 				{
-					//Install each mod in the mod package
-					pack.Install(ActiveProfile);
+					//Check for conflicts
+					string conflicting_mod;
+					if(ActiveProfile.IsConflictingWithInstalled(pack, out conflicting_mod))
+					{
+						MessageBox.Show("This mod is conflicting with '" + conflicting_mod + "'.If you wish to install this mod, uninstall '" + conflicting_mod + "' first!\nInstallation canceled!");
+					}
+					else
+					{
+						//Install each mod in the mod package
+						pack.Install(ActiveProfile);
 
-					//Update the profile after install is done
-					ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
-					ActiveProfile.WriteJSON(PathToActiveProfile);
-					UpdatePackageLists();
-					MessageBox.Show("Done installing '" + pack.Name + "'.");
+						//Update the profile after install is done
+						ActiveProfile.Packages[ActiveProfile.FindPackageIndex(pack)] = pack;
+						ActiveProfile.WriteJSON(PathToActiveProfile);
+						UpdatePackageLists();
+						MessageBox.Show("Done installing '" + pack.Name + "'.");
+					}
 				}
 			}           
 		}
@@ -324,32 +349,39 @@ namespace modmanager
 
 		private void addPackageToProfileFromTNTArchiveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if(IsProfileLoaded())
+			try
 			{
-				if (open_tnt_dialog.ShowDialog() == DialogResult.OK)
+				if (IsProfileLoaded())
 				{
-					ModPackage pack = Utils.ExtractTNTArchive(open_tnt_dialog.FileName, ActiveProfile);
+					if (open_tnt_dialog.ShowDialog() == DialogResult.OK)
+					{
+						ModPackage pack = Utils.ExtractTNTArchive(open_tnt_dialog.FileName, ActiveProfile);
 
-					if(pack == null)
-					{
-						MessageBox.Show("Error creating ModPackage from TNT archive!");
-					}
-					else
-					{
-						if(ActiveProfile.HasDuplicate(pack))
+						if (pack == null)
 						{
-							MessageBox.Show("The mod you are trying to add to your profile is already added!");
+							throw new Exception("Error creating ModPackage from TNT archive!");
 						}
 						else
 						{
-							pack.IsInstalled = false;
-							pack.BackupIfNeeded(ActiveProfile);
-							ActiveProfile.AddPackage(pack);
-							UpdateActiveProfile(ActiveProfile);
+							if (ActiveProfile.HasDuplicate(pack))
+							{
+								throw new Exception("The mod you are trying to add to your profile is already added!");
+							}
+							else
+							{
+								pack.IsInstalled = false;
+								pack.BackupIfNeeded(ActiveProfile);
+								ActiveProfile.AddPackage(pack);
+								UpdateActiveProfile(ActiveProfile);
+							}
 						}
 					}
 				}
-			}			
+			}	
+			catch(Exception err)
+			{
+				MessageBox.Show("Error adding mod to profile: \n\n" + err.Message);
+			}		
 		}
 	}
 }
