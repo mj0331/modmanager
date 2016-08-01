@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace modmanager
 {
@@ -19,7 +20,8 @@ namespace modmanager
 
 		private void InitModManager()
 		{
-			ActiveProfile = new Profile("", "", "", "");
+			ActiveProfile = new Profile();
+			//ActiveProfile = new Profile("", "", "", "");
 
 			this.Text = "Mod Manager - (no profile loaded)";
 			open_profile_dialog.CheckFileExists = true;
@@ -111,7 +113,8 @@ namespace modmanager
 				{
 					Stream s = open_profile_dialog.OpenFile();
 					StreamReader sr = new StreamReader(s);
-					Profile p = Profile.FromJSON(sr.ReadToEnd());
+					string contents = sr.ReadToEnd();
+					Profile p = Profile.FromJSON(contents);
 					sr.Close();
 					s.Close();
 
@@ -382,6 +385,15 @@ namespace modmanager
 			{
 				MessageBox.Show("Error adding mod to profile: \n\n" + err.Message);
 			}		
+		}
+
+		private void startToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ProcessStartInfo proc = new ProcessStartInfo();
+			proc.WorkingDirectory = ActiveProfile.GamePath;
+			proc.FileName = Path.Combine(ActiveProfile.GamePath, ActiveProfile.ExecutableName);
+
+			Process.Start(proc);
 		}
 	}
 }

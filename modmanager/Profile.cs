@@ -6,12 +6,12 @@ namespace modmanager
 {
 	public class Profile
 	{
-		const int LatestFileFormatVersion = 1;
-		const int MaxPackageCount = 64000;
+		const int LatestFileFormatVersion = 2;
 		const int PackageArraySizeIncrease = 8;
 
 		public string GameName;
 		public string GamePath;
+		public string ExecutableName;
 		public string ModPath;
 		public string BackupRoot;
 		public int FileFormatVersion;
@@ -19,17 +19,27 @@ namespace modmanager
 		public int PackageCount;
 		public ModPackage[] Packages;
 
-		public Profile(string game_name, string game_path, string mod_path, string backup_root, int ff_version = Profile.LatestFileFormatVersion)
+		public Profile()
+		{
+
+		}
+
+		public Profile(string game_name="", string full_exe_path="\\", string mod_path="", string backup_root="", int ff_version = Profile.LatestFileFormatVersion)
 		{
 			GameName = game_name;
-			GamePath = game_path;
+			GamePath = Utils.GetLastDirectory(full_exe_path);
+			ExecutableName = Utils.GetRelativePath(full_exe_path, GamePath);
 			ModPath = mod_path;
 			BackupRoot = backup_root;
 			FileFormatVersion = ff_version;
 
 			PackageCount = 0;
 			Packages = new ModPackage[PackageCount];
-			
+
+			if (ff_version < LatestFileFormatVersion)
+			{
+				throw new Exception("Cannot create a profile. The given format version is outdated!");
+			}			
 		}
 
 		public void WriteJSON(string profileFileDir)
@@ -43,19 +53,26 @@ namespace modmanager
 		public static Profile ReadJSON(string profile_file_path)
 		{
 			string profile_json = File.ReadAllText(profile_file_path);
-
-			return JsonConvert.DeserializeObject<Profile>(profile_json);
+			return Profile.FromJSON(profile_json);
 		}
 
 		public static Profile FromJSON(string profile_json)
 		{
-			return JsonConvert.DeserializeObject<Profile>(profile_json);
+			Profile p = JsonConvert.DeserializeObject<Profile>(profile_json);
+
+			if (p.FileFormatVersion < LatestFileFormatVersion)
+			{
+				throw new Exception("Cannot create a profile. The given format version is outdated!");
+			}
+
+			return p;
 		}
 
 		public string About()
 		{
 			string about = "Game name: " + GameName + "\n" +
 							"Game path: " + GamePath + "\n" +
+							"Executable name: " + ExecutableName + "\n" +
 							"Mods path: " + ModPath + "\n" +
 							"Backup path: " + BackupRoot + "\n" +
 							"Profile format version: " + FileFormatVersion + "\n";
@@ -74,6 +91,7 @@ namespace modmanager
 			PackageCount++;
 
 		}
+
 
 		//Returns true if mod existed and has been deleted, false otherwise
 		public bool RemovePackage(ModPackage pack)
@@ -124,7 +142,6 @@ namespace modmanager
 					return Packages[i];
 				}
 			}
-
 			return null;
 		}
 
@@ -176,7 +193,6 @@ namespace modmanager
 					}
 				}
 			}
-
 			return isOriginal;
 		}
 
@@ -203,7 +219,6 @@ namespace modmanager
 			conflicting_mod_name = "";
 			return false;
 		}
-
 	}
 }
 

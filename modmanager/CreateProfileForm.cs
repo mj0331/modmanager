@@ -21,9 +21,12 @@ namespace modmanager
 
 		private void game_browse_Click(object sender, EventArgs e)
 		{
-			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 			{
-				game_input.Text = folderBrowserDialog1.SelectedPath;
+				if(openFileDialog1.CheckFileExists)
+				{
+					game_input.Text = openFileDialog1.FileName;
+				}
 			}		
 		}
 
@@ -59,11 +62,18 @@ namespace modmanager
 
 		private void CreateProfile()
 		{
-			Profile p = new Profile(name_input.Text, game_input.Text, mod_input.Text, backup_input.Text);
-			p.WriteJSON(profile_input.Text);
+			try
+			{
+				Profile p = new Profile(name_input.Text, game_input.Text, mod_input.Text, backup_input.Text);
+				p.WriteJSON(profile_input.Text);
 
-			//DEBUG
-			MessageBox.Show("Created profile:\n\n" + JsonConvert.SerializeObject(p, Formatting.Indented));
+				MessageBox.Show("Created profile:\n\n" + JsonConvert.SerializeObject(p, Formatting.Indented));
+			}
+			catch(Exception e)
+			{
+				MessageBox.Show("Error encountered while creating profile:\n" + e.Message);
+			}
+			
 		}
 
 		private void create_profile_confirm_Click(object sender, EventArgs e)
