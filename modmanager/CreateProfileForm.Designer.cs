@@ -33,7 +33,6 @@
 			this.name_input = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.game_input = new System.Windows.Forms.TextBox();
 			this.backup_input = new System.Windows.Forms.TextBox();
 			this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
@@ -48,6 +47,7 @@
 			this.mod_input = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.folderBrowserDialog4 = new System.Windows.Forms.FolderBrowserDialog();
+			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -72,9 +72,9 @@
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(12, 43);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(67, 13);
+			this.label2.Size = new System.Drawing.Size(93, 13);
 			this.label2.TabIndex = 2;
-			this.label2.Text = "Game folder:";
+			this.label2.Text = "Game executable:";
 			// 
 			// label3
 			// 
@@ -199,6 +199,10 @@
 			this.label5.TabIndex = 13;
 			this.label5.Text = "Mod files folder:";
 			// 
+			// openFileDialog1
+			// 
+			this.openFileDialog1.FileName = "openFileDialog1";
+			// 
 			// CreateProfileForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,7 +239,6 @@
 		private System.Windows.Forms.TextBox name_input;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 		private System.Windows.Forms.TextBox game_input;
 		private System.Windows.Forms.TextBox backup_input;
 		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
@@ -250,5 +253,6 @@
 		private System.Windows.Forms.TextBox mod_input;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog4;
+		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 	}
 }
