@@ -395,5 +395,42 @@ namespace modmanager
 
 			Process.Start(proc);
 		}
+
+		private void startNoModsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			//Create a profile backup to be restored after the game exits
+			Profile temp = ActiveProfile;
+
+			//Disable any enabled mod
+			for(int i = 0; i < ActiveProfile.PackageCount; i++)
+			{
+				if(ActiveProfile.Packages[i].IsInstalled)
+				{
+					ActiveProfile.Packages[i].Uninstall(ActiveProfile, false);
+				}
+			}
+
+			//Set up the game process
+			ProcessStartInfo proc = new ProcessStartInfo();
+			proc.WorkingDirectory = ActiveProfile.GamePath;
+			proc.FileName = Path.Combine(ActiveProfile.GamePath, ActiveProfile.ExecutableName);
+
+			using (Process p = Process.Start(proc))
+			{
+				p.WaitForExit();
+
+				//After the game is over, restore the old profile
+				ActiveProfile = temp;
+
+				//Re-enable any previously enabled mod
+				for (int i = 0; i < ActiveProfile.PackageCount; i++)
+				{
+					if (ActiveProfile.Packages[i].IsInstalled)
+					{
+						ActiveProfile.Packages[i].Install(ActiveProfile);
+					}
+				}
+			}
+		}
 	}
 }
