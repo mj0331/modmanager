@@ -56,8 +56,15 @@ namespace modmanager
 			}
 
 			string last_dir = Utils.GetLastDirectory(manifest_dir);
+			string tnt_path = Path.Combine(last_dir, pack.Name + ".TNT");
 
-			ZipFile.CreateFromDirectory(manifest_dir, Path.Combine(last_dir, pack.Name + ".TNT"), CompressionLevel.Optimal, false);
+			//If there's a tnt file already, overwrite it
+			if(File.Exists(tnt_path))
+			{
+				File.Delete(tnt_path);
+			}
+
+			ZipFile.CreateFromDirectory(manifest_dir, tnt_path, CompressionLevel.Optimal, false);
 		}
 
 
