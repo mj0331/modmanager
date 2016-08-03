@@ -90,11 +90,10 @@ namespace modmanager
 					break;
 				case "Addition":
 					ActiveMod.ModType = Mod.Type.Addition;
-					if (Path.GetFileName(target_path.Text) != string.Empty)
+					if (Path.GetFileName(target_path.Text) != string.Empty && File.Exists(target_path.Text))
 					{
 						target_path.Text = Utils.GetLastDirectory(ActiveMod.TargetFile);
 					}
-
 					break;
 				default:
 					break;
