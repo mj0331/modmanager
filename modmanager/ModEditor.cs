@@ -82,15 +82,17 @@ namespace modmanager
 				case "Replacement":
 					ActiveMod.ModType = Mod.Type.Replacement;
 					string filename = Path.GetFileName(target_path.Text);
-					if (!File.Exists(filename))
+					if (!File.Exists(filename) && Directory.Exists(Path.Combine(Form1.ActiveProfile.GamePath, target_path.Text)))
 					{
+						ActiveMod.TargetFile = Path.Combine(target_path.Text, Path.GetFileName(modded_path.Text));
 						target_path.Text = ActiveMod.TargetFile;
 					}
 
 					break;
 				case "Addition":
 					ActiveMod.ModType = Mod.Type.Addition;
-					if (Path.GetFileName(target_path.Text) != string.Empty && File.Exists(target_path.Text))
+					if	(Path.GetFileName(target_path.Text) != string.Empty || 
+						(Path.GetFileName(Path.Combine(Form1.ActiveProfile.GamePath, target_path.Text)) != string.Empty))
 					{
 						target_path.Text = Utils.GetLastDirectory(ActiveMod.TargetFile);
 					}
