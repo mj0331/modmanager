@@ -121,7 +121,7 @@ namespace modmanager
 
 				if(isFound)
 				{
-					if(i == ModCount - 1)
+					if(i >= ModCount - 1)
 					{
 						Mods[i] = null;
 					}

@@ -15,14 +15,12 @@ namespace modmanager
 	{
 		ModPackage TargetPack;
 		Mod ActiveMod;
-		bool IsNew;
 
 		public ModEditor(ModPackage pack)
 		{
 			InitializeComponent();
 			ActiveMod = new Mod("", "");
 			TargetPack = pack;
-			IsNew = true;
 			targetFile.InitialDirectory = Form1.ActiveProfile.GamePath;
 			UpdateDisplayData();
 		}
@@ -32,7 +30,6 @@ namespace modmanager
 			InitializeComponent();
 			ActiveMod = m;
 			TargetPack = pack;
-			IsNew = false;
 			targetFile.InitialDirectory = Form1.ActiveProfile.GamePath;
 			UpdateDisplayData();
 		}
@@ -109,6 +106,43 @@ namespace modmanager
 
 			DialogResult = DialogResult.OK;
 			Hide();
+		}
+
+		private void modded_path_DragDrop(object sender, DragEventArgs e)
+		{
+			string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if(files != null)
+			{
+				modded_path.Text = files[0];
+				ActiveMod.ModdedFile = modded_path.Text;
+			}
+			
+		}
+
+		private void modded_path_DragEnter(object sender, DragEventArgs e)
+		{
+			if(e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+		private void target_path_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+		private void target_path_DragDrop(object sender, DragEventArgs e)
+		{
+			string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if (files != null)
+			{
+				target_path.Text = files[0];
+				ActiveMod.TargetFile = target_path.Text;
+			}
 		}
 	}
 }

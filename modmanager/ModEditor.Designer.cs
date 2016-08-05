@@ -55,11 +55,14 @@
 			// 
 			// modded_path
 			// 
+			this.modded_path.AllowDrop = true;
 			this.modded_path.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.modded_path.Location = new System.Drawing.Point(101, 12);
 			this.modded_path.Name = "modded_path";
 			this.modded_path.Size = new System.Drawing.Size(373, 20);
 			this.modded_path.TabIndex = 1;
+			this.modded_path.DragDrop += new System.Windows.Forms.DragEventHandler(this.modded_path_DragDrop);
+			this.modded_path.DragEnter += new System.Windows.Forms.DragEventHandler(this.modded_path_DragEnter);
 			// 
 			// modded_browse
 			// 
@@ -89,11 +92,14 @@
 			// 
 			// target_path
 			// 
+			this.target_path.AllowDrop = true;
 			this.target_path.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.target_path.Location = new System.Drawing.Point(101, 47);
 			this.target_path.Name = "target_path";
 			this.target_path.Size = new System.Drawing.Size(373, 20);
 			this.target_path.TabIndex = 4;
+			this.target_path.DragDrop += new System.Windows.Forms.DragEventHandler(this.target_path_DragDrop);
+			this.target_path.DragEnter += new System.Windows.Forms.DragEventHandler(this.target_path_DragEnter);
 			// 
 			// label2
 			// 
