@@ -52,7 +52,16 @@ namespace modmanager
 
 			for(int i = 0; i < Target.ModCount; i++)
 			{
-				mod_list.Items.Add(Target.Mods[i].TargetFile);
+				string display_string = Target.Mods[i].TargetFile;
+				
+				//If this is an Addition mod, also add the modded filename at the end
+				if(Target.Mods[i].ModType == Mod.Type.Addition)
+				{
+					string fname = Utils.GetRelativePath(Target.Mods[i].ModdedFile, Utils.GetLastDirectory(Target.Mods[i].ModdedFile));
+					display_string += "(" + fname + ")";
+				}
+
+				mod_list.Items.Add(display_string);
 			}
 		}
 
@@ -65,7 +74,17 @@ namespace modmanager
 		{
 		   	if(mod_list.SelectedItem != null)
 			{
-				Mod t = Target.FindByTarget(mod_list.SelectedItem.ToString());
+				string target = mod_list.SelectedItem.ToString();
+				int index = target.IndexOf('(');
+
+				//If the display string also contains the file name in between brackets(as it is the case for addition mods)
+				if(index >= 0)
+				{
+					//Cut off the file name and brackets
+					target = target.Substring(0, (index));
+				}
+				
+				Mod t = Target.FindByTarget(target);
 				
 				if(t != null)
 				{
