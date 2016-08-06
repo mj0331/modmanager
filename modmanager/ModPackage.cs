@@ -34,24 +34,30 @@ namespace modmanager
 			File.WriteAllText(file_path, package_json);
 		}
 
-		public void Install(Profile p)
+		public void Install(Profile p, bool set_installed_flag=true)
 		{
 			for (int i = 0; i < ModCount; i++)
 			{
 				Mods[i].Install(p, this);
 			}
 
-			IsInstalled = true;
+			if (set_installed_flag)
+			{
+				IsInstalled = true;
+			}
 		}
 
-		public void Uninstall(Profile p)
+		public void Uninstall(Profile p, bool set_installed_flag = true)
 		{
 			for (int i = 0; i < ModCount; i++)
 			{
 				Mods[i].Uninstall(p, this);
 			}
 
-			IsInstalled = false;
+			if (set_installed_flag)
+			{
+				IsInstalled = false;
+			}
 		}
 
 		public static ModPackage FromJSON(string filepath)
@@ -115,7 +121,7 @@ namespace modmanager
 
 				if(isFound)
 				{
-					if(i == ModCount - 1)
+					if(i >= ModCount - 1)
 					{
 						Mods[i] = null;
 					}

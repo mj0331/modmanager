@@ -112,11 +112,17 @@ namespace modmanager
 		//N.B.: As of now, this is the same as ReplaceInstall, but the install logic may change in the future, so this stays
 		void AdditionInstall(Profile p, ModPackage pack)
 		{
-			string target = Path.Combine(p.GamePath, TargetFile, Path.GetFileName(ModdedFile));
+			string target_dir = Path.Combine(p.GamePath, TargetFile);
+			string target = Path.Combine(target_dir, Path.GetFileName(ModdedFile));
 			string mod = Path.Combine(p.ModPath, pack.Name, ModdedFile);
 
 			try
 			{
+				if (!Directory.Exists(target_dir))
+				{
+					Directory.CreateDirectory(target_dir);
+				}
+
 				File.Copy(mod, target, true);
 			}
 			catch (Exception e)

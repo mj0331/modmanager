@@ -106,6 +106,7 @@
 			this.startNoModsToolStripMenuItem.Name = "startNoModsToolStripMenuItem";
 			this.startNoModsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.startNoModsToolStripMenuItem.Text = "Start(No Mods)";
+			this.startNoModsToolStripMenuItem.Click += new System.EventHandler(this.startNoModsToolStripMenuItem_Click);
 			// 
 			// profileToolStripMenuItem
 			// 

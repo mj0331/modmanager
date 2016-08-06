@@ -15,14 +15,12 @@ namespace modmanager
 	{
 		ModPackage TargetPack;
 		Mod ActiveMod;
-		bool IsNew;
 
 		public ModEditor(ModPackage pack)
 		{
 			InitializeComponent();
 			ActiveMod = new Mod("", "");
 			TargetPack = pack;
-			IsNew = true;
 			targetFile.InitialDirectory = Form1.ActiveProfile.GamePath;
 			UpdateDisplayData();
 		}
@@ -32,7 +30,6 @@ namespace modmanager
 			InitializeComponent();
 			ActiveMod = m;
 			TargetPack = pack;
-			IsNew = false;
 			targetFile.InitialDirectory = Form1.ActiveProfile.GamePath;
 			UpdateDisplayData();
 		}
@@ -82,19 +79,23 @@ namespace modmanager
 				case "Replacement":
 					ActiveMod.ModType = Mod.Type.Replacement;
 					string filename = Path.GetFileName(target_path.Text);
-					if (!File.Exists(filename))
+					if (!File.Exists(filename) && Directory.Exists(Path.Combine(Form1.ActiveProfile.GamePath, target_path.Text)))
 					{
+						ActiveMod.TargetFile = Path.Combine(target_path.Text, Path.GetFileName(modded_path.Text));
 						target_path.Text = ActiveMod.TargetFile;
 					}
 
 					break;
 				case "Addition":
 					ActiveMod.ModType = Mod.Type.Addition;
-					if (Path.GetFileName(target_path.Text) != string.Empty)
-					{
-						target_path.Text = Utils.GetLastDirectory(ActiveMod.TargetFile);
-					}
+					string target_file_path = Path.Combine(Form1.ActiveProfile.GamePath, target_path.Text);
+					string ext = Path.GetExtension(target_file_path);
 
+					if	(ext != string.Empty )
+					{
+						ActiveMod.TargetFile = Utils.GetLastDirectory(ActiveMod.TargetFile);
+						target_path.Text = ActiveMod.TargetFile;
+					}
 					break;
 				default:
 					break;
@@ -108,6 +109,43 @@ namespace modmanager
 
 			DialogResult = DialogResult.OK;
 			Hide();
+		}
+
+		private void modded_path_DragDrop(object sender, DragEventArgs e)
+		{
+			string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if(files != null)
+			{
+				modded_path.Text = files[0];
+				ActiveMod.ModdedFile = modded_path.Text;
+			}
+			
+		}
+
+		private void modded_path_DragEnter(object sender, DragEventArgs e)
+		{
+			if(e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+		private void target_path_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+		private void target_path_DragDrop(object sender, DragEventArgs e)
+		{
+			string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if (files != null)
+			{
+				target_path.Text = files[0];
+				ActiveMod.TargetFile = target_path.Text;
+			}
 		}
 	}
 }
