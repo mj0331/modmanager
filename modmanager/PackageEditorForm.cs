@@ -86,23 +86,59 @@ namespace modmanager
 
 		private void savePackageToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+			try
 			{
-				UpdateTarget();
-				string file_path = Path.Combine(folderBrowserDialog1.SelectedPath, "package.json");
-				Target.WriteJSON(file_path);
-				MessageBox.Show("Created package manifest at:\n" + file_path);
+				if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+				{
+					UpdateTarget();
+					string file_dir = folderBrowserDialog1.SelectedPath;
+					string file_path = Path.Combine(file_dir, "package.json");
+
+					//Update mod file paths to be relative to the manifest
+					for (int i = 0; i < Target.ModCount; i++)
+					{
+						string rel_mod_path = Utils.GetRelativePath(Target.Mods[i].ModdedFile, file_dir);
+
+						Target.Mods[i].ModdedFile = rel_mod_path;
+					}
+
+					Target.WriteJSON(file_path);
+					MessageBox.Show("Created package manifest at:\n" + file_path);
+				}
 			}
+			catch(Exception err)
+			{
+				MessageBox.Show("Error saving file:\n\n" + err.Message);
+			}
+			
 		}
 
 		private void savePackageExistingManifestToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+			try
 			{
-				UpdateTarget();
-				Target.WriteJSON(saveFileDialog1.FileName);
-				MessageBox.Show("Saved package manifest at:\n" + saveFileDialog1.FileName);
+				if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+				{
+					UpdateTarget();
+
+					string file_dir = Utils.GetLastDirectory(saveFileDialog1.FileName);
+					//Update mod file paths to be relative to the manifest
+					for (int i = 0; i < Target.ModCount; i++)
+					{
+						string rel_mod_path = Utils.GetRelativePath(Target.Mods[i].ModdedFile, file_dir);
+
+						Target.Mods[i].ModdedFile = rel_mod_path;
+					}
+
+					Target.WriteJSON(saveFileDialog1.FileName);
+					MessageBox.Show("Saved package manifest at:\n" + saveFileDialog1.FileName);
+				}
 			}
+			catch (Exception err)
+			{
+				MessageBox.Show("Error saving file:\n\n" + err.Message);
+			}
+			
 		}
 
 		private void new_mod_button_Click(object sender, EventArgs e)

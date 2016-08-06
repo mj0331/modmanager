@@ -88,10 +88,13 @@ namespace modmanager
 					break;
 				case "Addition":
 					ActiveMod.ModType = Mod.Type.Addition;
-					if	(Path.GetFileName(target_path.Text) != string.Empty || 
-						(Path.GetFileName(Path.Combine(Form1.ActiveProfile.GamePath, target_path.Text)) != string.Empty))
+					string target_file_path = Path.Combine(Form1.ActiveProfile.GamePath, target_path.Text);
+					string ext = Path.GetExtension(target_file_path);
+
+					if	(ext != string.Empty )
 					{
-						target_path.Text = Utils.GetLastDirectory(ActiveMod.TargetFile);
+						ActiveMod.TargetFile = Utils.GetLastDirectory(ActiveMod.TargetFile);
+						target_path.Text = ActiveMod.TargetFile;
 					}
 					break;
 				default:
