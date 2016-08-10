@@ -25,7 +25,6 @@ namespace modmanager
 		private void InitModManager()
 		{
 			ActiveProfile = new Profile();
-			//ActiveProfile = new Profile("", "", "", "");
 
 			this.Text = "Mod Manager - (no profile loaded)";
 			open_profile_dialog.CheckFileExists = true;
@@ -109,7 +108,7 @@ namespace modmanager
 
 		public bool IsProfileLoaded()
 		{
-			if(ActiveProfile.GameName == "")
+			if(ActiveProfile.GameName == "" || ActiveProfile.GameName == null)
 			{
 				MessageBox.Show("No profile loaded!", "Error");
 				return false;
@@ -402,15 +401,25 @@ namespace modmanager
 
 		private void startToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (!IsProfileLoaded())
+			{
+				return;
+			}
+
 			ProcessStartInfo proc = new ProcessStartInfo();
 			proc.WorkingDirectory = ActiveProfile.GamePath;
 			proc.FileName = Path.Combine(ActiveProfile.GamePath, ActiveProfile.ExecutableName);
 
-			Process.Start(proc);
+			Process.Start(proc);			
 		}
 
 		private void startNoModsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if(!IsProfileLoaded())
+			{
+				return;
+			}
+
 			//Create a profile backup to be restored after the game exits
 			Profile temp = ActiveProfile;
 
@@ -455,5 +464,6 @@ namespace modmanager
 
 			MessageBox.Show(about_msg);
 		}
+
 	}
 }
