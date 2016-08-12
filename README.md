@@ -71,6 +71,12 @@ This is a bit of a lengthy process as each individual file you alter/add needs t
 
 #Changelog
 
+###v0.5 - Like v0.4, but better
+  + Newly created profiles will now be automatically loaded
+  + You can now open the game folder from the *Game* menu
+  + Fixed issue #17: *Profile existence check broken*
+  + Fixed issue #18: *About button does nothing*
+
 ###v0.4 - Drag'n'Drop is nice
   + There is a *Game* menu item, allowing users to start the game from within the mod manager, either as it is or with all known mods disabled
   + You may now drag'n'drop files and folders onto the mod editor inputs to get their paths
