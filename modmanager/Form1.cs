@@ -2,13 +2,17 @@
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Reflection;
 
+[assembly: AssemblyVersion("0.5.*")]
 namespace modmanager
 {
+	
 	public partial class Form1 : Form
 	{
 		public static Profile ActiveProfile;
 		private static string PathToActiveProfile;
+		public static string Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 		private ModPackage SelectedPackage;
 
@@ -21,7 +25,6 @@ namespace modmanager
 		private void InitModManager()
 		{
 			ActiveProfile = new Profile();
-			//ActiveProfile = new Profile("", "", "", "");
 
 			this.Text = "Mod Manager - (no profile loaded)";
 			open_profile_dialog.CheckFileExists = true;
@@ -44,7 +47,16 @@ namespace modmanager
 		private void createProfileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			CreateProfileForm create_profile_form = new CreateProfileForm();
-			create_profile_form.ShowDialog();
+			if(create_profile_form.ShowDialog() == DialogResult.OK)
+			{
+				Profile NewProfile = create_profile_form.CreatedProfile;
+				PathToActiveProfile = create_profile_form.CreatedProfilePath;
+
+				UpdateActiveProfile(NewProfile);
+
+				//Save profile path so it can be automatically loaded next time the mod manager starts
+				File.WriteAllText("lastsession", Path.Combine(PathToActiveProfile, NewProfile.GameName + ".json"));
+			}
 		}
 
 		public void UpdatePackageInfo(ModPackage pack)
@@ -96,7 +108,7 @@ namespace modmanager
 
 		public bool IsProfileLoaded()
 		{
-			if(ActiveProfile.GameName == "")
+			if(ActiveProfile.GameName == "" || ActiveProfile.GameName == null)
 			{
 				MessageBox.Show("No profile loaded!", "Error");
 				return false;
@@ -389,15 +401,25 @@ namespace modmanager
 
 		private void startToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (!IsProfileLoaded())
+			{
+				return;
+			}
+
 			ProcessStartInfo proc = new ProcessStartInfo();
 			proc.WorkingDirectory = ActiveProfile.GamePath;
 			proc.FileName = Path.Combine(ActiveProfile.GamePath, ActiveProfile.ExecutableName);
 
-			Process.Start(proc);
+			Process.Start(proc);			
 		}
 
 		private void startNoModsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if(!IsProfileLoaded())
+			{
+				return;
+			}
+
 			//Create a profile backup to be restored after the game exits
 			Profile temp = ActiveProfile;
 
@@ -431,6 +453,26 @@ namespace modmanager
 					}
 				}
 			}
+		}
+
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string about_msg =	"Mod Manager\n" +
+								"Simple mod management utility for Tooth and Tail\n" +
+								"version " + Version + "\n\n" +
+								"GitHub: https://github.com/mj0331/modmanager";
+
+			MessageBox.Show(about_msg);
+		}
+
+		private void openGameFolderToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(!IsProfileLoaded())
+			{
+				return;
+			}
+
+			Process.Start(ActiveProfile.GamePath);
 		}
 	}
 }

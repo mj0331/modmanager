@@ -14,9 +14,13 @@ namespace modmanager
 {
 	public partial class CreateProfileForm : Form
 	{
+		public Profile CreatedProfile;
+		public string CreatedProfilePath;
+
 		public CreateProfileForm()
 		{
 			InitializeComponent();
+			CreatedProfile = new Profile();
 		}
 
 		private void game_browse_Click(object sender, EventArgs e)
@@ -65,6 +69,8 @@ namespace modmanager
 			try
 			{
 				Profile p = new Profile(name_input.Text, game_input.Text, mod_input.Text, backup_input.Text);
+				CreatedProfile = p;
+				CreatedProfilePath = profile_input.Text;
 				p.WriteJSON(profile_input.Text);
 
 				MessageBox.Show("Created profile:\n\n" + JsonConvert.SerializeObject(p, Formatting.Indented));
@@ -81,6 +87,7 @@ namespace modmanager
 			if(ValidateInput())
 			{
 				CreateProfile();
+				this.DialogResult = DialogResult.OK;
 				this.Close();
 			}
 			else

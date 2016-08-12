@@ -64,6 +64,8 @@
 			this.selected_package_description = new System.Windows.Forms.TextBox();
 			this.open_manifest_dialog = new System.Windows.Forms.OpenFileDialog();
 			this.open_tnt_dialog = new System.Windows.Forms.OpenFileDialog();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.openGameFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -89,7 +91,9 @@
 			// 
 			this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem,
-            this.startNoModsToolStripMenuItem});
+            this.startNoModsToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.openGameFolderToolStripMenuItem});
 			this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
 			this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
 			this.gameToolStripMenuItem.Text = "Game";
@@ -97,14 +101,14 @@
 			// startToolStripMenuItem
 			// 
 			this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-			this.startToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.startToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
 			this.startToolStripMenuItem.Text = "Start";
 			this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
 			// 
 			// startNoModsToolStripMenuItem
 			// 
 			this.startNoModsToolStripMenuItem.Name = "startNoModsToolStripMenuItem";
-			this.startNoModsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.startNoModsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
 			this.startNoModsToolStripMenuItem.Text = "Start(No Mods)";
 			this.startNoModsToolStripMenuItem.Click += new System.EventHandler(this.startNoModsToolStripMenuItem_Click);
 			// 
@@ -218,6 +222,7 @@
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
 			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
 			this.aboutToolStripMenuItem.Text = "About";
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
 			// profile_label
 			// 
@@ -384,6 +389,18 @@
 			// 
 			this.open_tnt_dialog.FileName = "openFileDialog1";
 			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(167, 6);
+			// 
+			// openGameFolderToolStripMenuItem
+			// 
+			this.openGameFolderToolStripMenuItem.Name = "openGameFolderToolStripMenuItem";
+			this.openGameFolderToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+			this.openGameFolderToolStripMenuItem.Text = "Open game folder";
+			this.openGameFolderToolStripMenuItem.Click += new System.EventHandler(this.openGameFolderToolStripMenuItem_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -455,6 +472,8 @@
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startNoModsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-    }
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripMenuItem openGameFolderToolStripMenuItem;
+	}
 }
 
