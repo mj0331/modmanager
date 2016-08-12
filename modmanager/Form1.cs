@@ -465,5 +465,14 @@ namespace modmanager
 			MessageBox.Show(about_msg);
 		}
 
+		private void openGameFolderToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(!IsProfileLoaded())
+			{
+				return;
+			}
+
+			Process.Start(ActiveProfile.GamePath);
+		}
 	}
 }
