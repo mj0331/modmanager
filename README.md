@@ -5,9 +5,6 @@ __Platform:__ Windows
 
 __Requires:__ .NET Framework v4.6
 
-__License:__ [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/#)
-
-
 # Creating a profile
 There isn't much you can do with the mod manager without a profile loaded. The profile contains info the mod manager needs in order to install an uninstall mods. In order to create a profile click *Profile* -> *Create new profile*. A window will pop up with the following fields.
 
