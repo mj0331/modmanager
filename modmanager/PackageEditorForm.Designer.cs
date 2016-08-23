@@ -231,9 +231,18 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
+			// folderBrowserDialog1
+			// 
+			this.folderBrowserDialog1.Description = "Select folder to save the manifest in";
+			// 
+			// saveFileDialog1
+			// 
+			this.saveFileDialog1.Title = "Select manifest file to override";
+			// 
 			// openFileDialog1
 			// 
 			this.openFileDialog1.FileName = "openFileDialog1";
+			this.openFileDialog1.Title = "Select manifest file to open";
 			// 
 			// PackageEditorForm
 			// 

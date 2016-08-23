@@ -8,44 +8,6 @@ using System.Drawing;
 [assembly: AssemblyVersion("0.5.*")]
 namespace modmanager
 {
-	public class MenuRenderer : ToolStripProfessionalRenderer
-	{
-		public MenuRenderer() : base(new MenuColorTable())
-		{
-
-		}
-	}
-
-	public class MenuColorTable : ProfessionalColorTable
-	{
-		public override Color MenuItemSelected
-		{
-			get { return Color.LightGray; }
-		}
-		public override Color MenuItemBorder
-		{
-			get{ return Color.LightGray; }
-		}
-
-		public override Color MenuItemSelectedGradientBegin
-		{
-			get { return Color.LightGray; }
-		}
-		public override Color MenuItemSelectedGradientEnd
-		{
-			get { return Color.LightGray; }
-		}
-
-		public override Color MenuItemPressedGradientBegin
-		{
-			get { return Color.LightGray; }
-		}
-		public override Color MenuItemPressedGradientEnd
-		{
-			get { return Color.LightGray; }
-		}
-
-	}
 
 	public partial class Form1 : Form
 	{
@@ -516,4 +478,44 @@ namespace modmanager
 			Process.Start(ActiveProfile.GamePath);
 		}
 	}
+
+	public class MenuRenderer : ToolStripProfessionalRenderer
+	{
+		public MenuRenderer() : base(new MenuColorTable())
+		{
+
+		}
+	}
+
+	public class MenuColorTable : ProfessionalColorTable
+	{
+		public override Color MenuItemSelected
+		{
+			get { return Color.LightGray; }
+		}
+		public override Color MenuItemBorder
+		{
+			get { return Color.LightGray; }
+		}
+
+		public override Color MenuItemSelectedGradientBegin
+		{
+			get { return Color.LightGray; }
+		}
+		public override Color MenuItemSelectedGradientEnd
+		{
+			get { return Color.LightGray; }
+		}
+
+		public override Color MenuItemPressedGradientBegin
+		{
+			get { return Color.LightGray; }
+		}
+		public override Color MenuItemPressedGradientEnd
+		{
+			get { return Color.LightGray; }
+		}
+
+	}
+
 }

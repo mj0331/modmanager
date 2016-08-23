@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -236,6 +235,10 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
+			// open_profile_dialog
+			// 
+			this.open_profile_dialog.Title = "Open Profile";
+			// 
 			// profile_label
 			// 
 			this.profile_label.AutoSize = true;
@@ -398,10 +401,12 @@
 			// open_manifest_dialog
 			// 
 			this.open_manifest_dialog.FileName = "package.json";
+			this.open_manifest_dialog.Title = "Select package manifest";
 			// 
 			// open_tnt_dialog
 			// 
 			this.open_tnt_dialog.FileName = "openFileDialog1";
+			this.open_tnt_dialog.Title = "Select .TNT Package";
 			// 
 			// Form1
 			// 
@@ -426,7 +431,6 @@
 			this.Controls.Add(this.profile_label);
 			this.Controls.Add(this.menuStrip1);
 			this.ForeColor = System.Drawing.SystemColors.Control;
-			//this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
 			this.Text = "Mod Manager";
