@@ -426,7 +426,7 @@
 			this.Controls.Add(this.profile_label);
 			this.Controls.Add(this.menuStrip1);
 			this.ForeColor = System.Drawing.SystemColors.Control;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			//this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
 			this.Text = "Mod Manager";

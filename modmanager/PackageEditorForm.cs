@@ -11,12 +11,14 @@ namespace modmanager
 		public PackageEditorForm()
 		{
 			InitializeComponent();
+			menuStrip1.Renderer = new MenuRenderer();
 			Target = new ModPackage("", "", "");
 		}
 
 		public PackageEditorForm(ModPackage p)
 		{
 			InitializeComponent();
+			menuStrip1.Renderer = new MenuRenderer();
 			Target = p;
 			UpdateDisplayData();
 		}
