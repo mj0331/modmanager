@@ -71,6 +71,22 @@ This is a bit of a lengthy process as each individual file you alter/add needs t
 
 #Changelog
 
+###v0.5 - Like v0.4, but better
+  + Newly created profiles will now be automatically loaded
+  + You can now open the game folder from the *Game* menu
+  + Fixed issue #17: *Profile existence check broken*
+  + Fixed issue #18: *About button does nothing*
+
+###v0.4 - Drag'n'Drop is nice
+  + There is a *Game* menu item, allowing users to start the game from within the mod manager, either as it is or with all known mods disabled
+  + You may now drag'n'drop files and folders onto the mod editor inputs to get their paths
+  + Addition mods now have the name of the modded file displayed in the package editor mod list
+  + Fixed issue #9: Mod editor removes the last directory in the path when addition mods are edited
+  + Fixed issue #11: Manifest file not being properly written to after multiple mods deleted
+  + Fixed issue #14: Exception when attempting to overwrite .TNT file.
+  + Fixed issue #15: Mod editor not updating target path after mod type change
+  + Fixed issue #16: ModFile string not relative to package manifest path 
+
 ###v0.3 - More AntiStupid
   + The menu bar is less of an eye sore. It is now white text over dark grey background
   + The mod manager now reloads the profile you had opened last time you ran the program
