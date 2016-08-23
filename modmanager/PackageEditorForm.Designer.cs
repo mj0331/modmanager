@@ -160,11 +160,14 @@
 			// 
 			// description_input
 			// 
+			this.description_input.AcceptsReturn = true;
+			this.description_input.AcceptsTab = true;
 			this.description_input.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.description_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.description_input.Location = new System.Drawing.Point(15, 128);
+			this.description_input.Location = new System.Drawing.Point(16, 128);
 			this.description_input.Multiline = true;
 			this.description_input.Name = "description_input";
+			this.description_input.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.description_input.Size = new System.Drawing.Size(383, 221);
 			this.description_input.TabIndex = 6;
 			// 
@@ -228,9 +231,18 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
+			// folderBrowserDialog1
+			// 
+			this.folderBrowserDialog1.Description = "Select folder to save the manifest in";
+			// 
+			// saveFileDialog1
+			// 
+			this.saveFileDialog1.Title = "Select manifest file to override";
+			// 
 			// openFileDialog1
 			// 
 			this.openFileDialog1.FileName = "openFileDialog1";
+			this.openFileDialog1.Title = "Select manifest file to open";
 			// 
 			// PackageEditorForm
 			// 

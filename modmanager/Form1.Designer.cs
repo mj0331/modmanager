@@ -33,6 +33,8 @@
 			this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.startNoModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.openGameFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.createProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.loadProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,8 +66,6 @@
 			this.selected_package_description = new System.Windows.Forms.TextBox();
 			this.open_manifest_dialog = new System.Windows.Forms.OpenFileDialog();
 			this.open_tnt_dialog = new System.Windows.Forms.OpenFileDialog();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.openGameFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -111,6 +111,18 @@
 			this.startNoModsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
 			this.startNoModsToolStripMenuItem.Text = "Start(No Mods)";
 			this.startNoModsToolStripMenuItem.Click += new System.EventHandler(this.startNoModsToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(167, 6);
+			// 
+			// openGameFolderToolStripMenuItem
+			// 
+			this.openGameFolderToolStripMenuItem.Name = "openGameFolderToolStripMenuItem";
+			this.openGameFolderToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+			this.openGameFolderToolStripMenuItem.Text = "Open game folder";
+			this.openGameFolderToolStripMenuItem.Click += new System.EventHandler(this.openGameFolderToolStripMenuItem_Click);
 			// 
 			// profileToolStripMenuItem
 			// 
@@ -164,33 +176,33 @@
 			// addPackageToProfileFromTNTArchiveToolStripMenuItem
 			// 
 			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Name = "addPackageToProfileFromTNTArchiveToolStripMenuItem";
-			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
+			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
 			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Text = "Add Package To Profile (From .TNT Archive)";
 			this.addPackageToProfileFromTNTArchiveToolStripMenuItem.Click += new System.EventHandler(this.addPackageToProfileFromTNTArchiveToolStripMenuItem_Click);
 			// 
 			// addPackageToProfileToolStripMenuItem
 			// 
 			this.addPackageToProfileToolStripMenuItem.Name = "addPackageToProfileToolStripMenuItem";
-			this.addPackageToProfileToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
+			this.addPackageToProfileToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
 			this.addPackageToProfileToolStripMenuItem.Text = "Add Package To Profile (From JSON Manifest)";
 			this.addPackageToProfileToolStripMenuItem.Click += new System.EventHandler(this.addPackageToProfileToolStripMenuItem_Click);
 			// 
 			// removePackageFromProfileToolStripMenuItem
 			// 
 			this.removePackageFromProfileToolStripMenuItem.Name = "removePackageFromProfileToolStripMenuItem";
-			this.removePackageFromProfileToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
+			this.removePackageFromProfileToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
 			this.removePackageFromProfileToolStripMenuItem.Text = "Remove Selected Package From Profile";
 			this.removePackageFromProfileToolStripMenuItem.Click += new System.EventHandler(this.removePackageFromProfileToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(312, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(313, 6);
 			// 
 			// makeTNTArchiveFromJSONManifestToolStripMenuItem
 			// 
 			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Name = "makeTNTArchiveFromJSONManifestToolStripMenuItem";
-			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
+			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
 			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Text = "Make .TNT Archive From .JSON Manifest";
 			this.makeTNTArchiveFromJSONManifestToolStripMenuItem.Click += new System.EventHandler(this.makeTNTArchiveFromJSONManifestToolStripMenuItem_Click);
 			// 
@@ -224,6 +236,10 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
+			// open_profile_dialog
+			// 
+			this.open_profile_dialog.Title = "Open Profile";
+			// 
 			// profile_label
 			// 
 			this.profile_label.AutoSize = true;
@@ -249,6 +265,7 @@
 			this.disabled_package_list.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.disabled_package_list.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.disabled_package_list.FormattingEnabled = true;
+			this.disabled_package_list.HorizontalScrollbar = true;
 			this.disabled_package_list.ItemHeight = 16;
 			this.disabled_package_list.Location = new System.Drawing.Point(22, 95);
 			this.disabled_package_list.Name = "disabled_package_list";
@@ -301,6 +318,7 @@
 			this.enabled_package_list.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.enabled_package_list.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.enabled_package_list.FormattingEnabled = true;
+			this.enabled_package_list.HorizontalScrollbar = true;
 			this.enabled_package_list.ItemHeight = 16;
 			this.enabled_package_list.Location = new System.Drawing.Point(320, 95);
 			this.enabled_package_list.Name = "enabled_package_list";
@@ -384,22 +402,12 @@
 			// open_manifest_dialog
 			// 
 			this.open_manifest_dialog.FileName = "package.json";
+			this.open_manifest_dialog.Title = "Select package manifest";
 			// 
 			// open_tnt_dialog
 			// 
 			this.open_tnt_dialog.FileName = "openFileDialog1";
-			// 
-			// toolStripSeparator3
-			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(167, 6);
-			// 
-			// openGameFolderToolStripMenuItem
-			// 
-			this.openGameFolderToolStripMenuItem.Name = "openGameFolderToolStripMenuItem";
-			this.openGameFolderToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-			this.openGameFolderToolStripMenuItem.Text = "Open game folder";
-			this.openGameFolderToolStripMenuItem.Click += new System.EventHandler(this.openGameFolderToolStripMenuItem_Click);
+			this.open_tnt_dialog.Title = "Select .TNT Package";
 			// 
 			// Form1
 			// 
@@ -468,10 +476,10 @@
 		private System.Windows.Forms.OpenFileDialog open_manifest_dialog;
 		private System.Windows.Forms.ToolStripMenuItem addPackageToProfileFromTNTArchiveToolStripMenuItem;
 		private System.Windows.Forms.OpenFileDialog open_tnt_dialog;
-        private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startNoModsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem startNoModsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem openGameFolderToolStripMenuItem;
 	}
