@@ -164,7 +164,7 @@
 			this.description_input.AcceptsTab = true;
 			this.description_input.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.description_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.description_input.Location = new System.Drawing.Point(25, 128);
+			this.description_input.Location = new System.Drawing.Point(16, 128);
 			this.description_input.Multiline = true;
 			this.description_input.Name = "description_input";
 			this.description_input.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
