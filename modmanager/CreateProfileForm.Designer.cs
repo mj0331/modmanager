@@ -87,19 +87,25 @@
 			// 
 			// game_input
 			// 
+			this.game_input.AllowDrop = true;
 			this.game_input.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.game_input.Location = new System.Drawing.Point(124, 43);
 			this.game_input.Name = "game_input";
 			this.game_input.Size = new System.Drawing.Size(350, 20);
 			this.game_input.TabIndex = 5;
+			this.game_input.DragDrop += new System.Windows.Forms.DragEventHandler(this.game_input_DragDrop);
+			this.game_input.DragEnter += new System.Windows.Forms.DragEventHandler(this.game_input_DragEnter);
 			// 
 			// backup_input
 			// 
+			this.backup_input.AllowDrop = true;
 			this.backup_input.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.backup_input.Location = new System.Drawing.Point(124, 105);
 			this.backup_input.Name = "backup_input";
 			this.backup_input.Size = new System.Drawing.Size(350, 20);
 			this.backup_input.TabIndex = 6;
+			this.backup_input.DragDrop += new System.Windows.Forms.DragEventHandler(this.game_input_DragDrop);
+			this.backup_input.DragEnter += new System.Windows.Forms.DragEventHandler(this.game_input_DragEnter);
 			// 
 			// game_browse
 			// 
@@ -151,10 +157,13 @@
 			// 
 			// profile_input
 			// 
+			this.profile_input.AllowDrop = true;
 			this.profile_input.Location = new System.Drawing.Point(124, 136);
 			this.profile_input.Name = "profile_input";
 			this.profile_input.Size = new System.Drawing.Size(350, 20);
 			this.profile_input.TabIndex = 11;
+			this.profile_input.DragDrop += new System.Windows.Forms.DragEventHandler(this.game_input_DragDrop);
+			this.profile_input.DragEnter += new System.Windows.Forms.DragEventHandler(this.game_input_DragEnter);
 			// 
 			// profile_browse
 			// 
@@ -184,11 +193,14 @@
 			// 
 			// mod_input
 			// 
+			this.mod_input.AllowDrop = true;
 			this.mod_input.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.mod_input.Location = new System.Drawing.Point(124, 74);
 			this.mod_input.Name = "mod_input";
 			this.mod_input.Size = new System.Drawing.Size(350, 20);
 			this.mod_input.TabIndex = 14;
+			this.mod_input.DragDrop += new System.Windows.Forms.DragEventHandler(this.game_input_DragDrop);
+			this.mod_input.DragEnter += new System.Windows.Forms.DragEventHandler(this.game_input_DragEnter);
 			// 
 			// label5
 			// 

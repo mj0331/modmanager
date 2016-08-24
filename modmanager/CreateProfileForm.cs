@@ -133,5 +133,22 @@ namespace modmanager
 				mod_input.Text = folderBrowserDialog4.SelectedPath;
 			}
 		}
+
+		private void game_input_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+		private void game_input_DragDrop(object sender, DragEventArgs e)
+		{
+			string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if (files != null)
+			{
+				(sender as TextBox).Text = files[0];
+			}
+		}
 	}
 }
