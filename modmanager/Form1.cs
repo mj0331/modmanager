@@ -49,17 +49,24 @@ namespace modmanager
 
 		private void createProfileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			CreateProfileForm create_profile_form = new CreateProfileForm();
-			if(create_profile_form.ShowDialog() == DialogResult.OK)
+			try
 			{
-				Profile NewProfile = create_profile_form.CreatedProfile;
-				PathToActiveProfile = create_profile_form.CreatedProfilePath;
+				CreateProfileForm create_profile_form = new CreateProfileForm();
+				if (create_profile_form.ShowDialog() == DialogResult.OK)
+				{
+					Profile NewProfile = create_profile_form.CreatedProfile;
+					PathToActiveProfile = create_profile_form.CreatedProfilePath;
 
-				UpdateActiveProfile(NewProfile);
+					UpdateActiveProfile(NewProfile);
 
-				//Save profile path so it can be automatically loaded next time the mod manager starts
-				File.WriteAllText("lastsession", Path.Combine(PathToActiveProfile, NewProfile.GameName + ".json"));
+					//Save profile path so it can be automatically loaded next time the mod manager starts
+					File.WriteAllText("lastsession", Path.Combine(PathToActiveProfile, NewProfile.GameName + ".json"));
+				}
+			}catch(Exception err)
+			{
+				MessageBox.Show("Error creating profile:\n" + err.Message);
 			}
+			
 		}
 
 		public void UpdatePackageInfo(ModPackage pack)
