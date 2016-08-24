@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Drawing;
 
-[assembly: AssemblyVersion("0.5.*")]
+[assembly: AssemblyVersion("0.6.*")]
 namespace modmanager
 {
 
