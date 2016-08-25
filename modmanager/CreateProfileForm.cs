@@ -86,7 +86,11 @@ namespace modmanager
 				game_input.TextLength > 0 &&
 				mod_input.TextLength > 0 &&
 				backup_input.TextLength > 0 &&
-				profile_input.TextLength > 0)
+				profile_input.TextLength > 0 &&
+				File.Exists(game_input.Text) &&
+				Directory.Exists(mod_input.Text) &&
+				Directory.Exists(backup_input.Text) &&
+				Directory.Exists(profile_input.Text))
 			{
 				return true;
 			}
@@ -122,7 +126,7 @@ namespace modmanager
 			}
 			else
 			{
-				MessageBox.Show("Cannot create profile! One ore more fields are empty!", "Error");
+				MessageBox.Show("Cannot create profile! One ore more fields are empty or one of the paths is not valid!", "Error");
 			}
 		}
 
