@@ -63,7 +63,7 @@
             this.openPackageToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(771, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(899, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -168,7 +168,7 @@
 			this.description_input.Multiline = true;
 			this.description_input.Name = "description_input";
 			this.description_input.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.description_input.Size = new System.Drawing.Size(383, 221);
+			this.description_input.Size = new System.Drawing.Size(383, 283);
 			this.description_input.TabIndex = 6;
 			// 
 			// label1
@@ -190,16 +190,16 @@
 			this.mod_list.ItemHeight = 16;
 			this.mod_list.Location = new System.Drawing.Point(414, 59);
 			this.mod_list.Name = "mod_list";
-			this.mod_list.Size = new System.Drawing.Size(345, 224);
+			this.mod_list.Size = new System.Drawing.Size(473, 304);
 			this.mod_list.TabIndex = 8;
 			// 
 			// new_mod_button
 			// 
 			this.new_mod_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.new_mod_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.new_mod_button.Location = new System.Drawing.Point(414, 306);
+			this.new_mod_button.Location = new System.Drawing.Point(411, 368);
 			this.new_mod_button.Name = "new_mod_button";
-			this.new_mod_button.Size = new System.Drawing.Size(112, 43);
+			this.new_mod_button.Size = new System.Drawing.Size(149, 43);
 			this.new_mod_button.TabIndex = 9;
 			this.new_mod_button.Text = "New";
 			this.new_mod_button.UseVisualStyleBackColor = true;
@@ -209,9 +209,9 @@
 			// 
 			this.edit_mod_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.edit_mod_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.edit_mod_button.Location = new System.Drawing.Point(532, 306);
+			this.edit_mod_button.Location = new System.Drawing.Point(566, 368);
 			this.edit_mod_button.Name = "edit_mod_button";
-			this.edit_mod_button.Size = new System.Drawing.Size(108, 43);
+			this.edit_mod_button.Size = new System.Drawing.Size(159, 43);
 			this.edit_mod_button.TabIndex = 10;
 			this.edit_mod_button.Text = "Edit";
 			this.edit_mod_button.UseVisualStyleBackColor = true;
@@ -223,9 +223,9 @@
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.button1.ForeColor = System.Drawing.SystemColors.Control;
-			this.button1.Location = new System.Drawing.Point(646, 306);
+			this.button1.Location = new System.Drawing.Point(731, 368);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(113, 43);
+			this.button1.Size = new System.Drawing.Size(156, 43);
 			this.button1.TabIndex = 11;
 			this.button1.Text = "Delete";
 			this.button1.UseVisualStyleBackColor = true;
@@ -249,7 +249,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.ClientSize = new System.Drawing.Size(771, 361);
+			this.ClientSize = new System.Drawing.Size(899, 423);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.edit_mod_button);
 			this.Controls.Add(this.new_mod_button);
