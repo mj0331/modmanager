@@ -1,5 +1,5 @@
 # modmanager
-A simple mod management tool created for the game Tooth & Tail(http://www.toothandtailgame.com/), but can be used for other games as well. The tool works by swapping modded files with the original ones. Right now the tool is still in development and it is not ready for the public.
+A simple mod management tool created for the game Tooth & Tail(http://www.toothandtailgame.com/), but can be used for other games as well. The tool works by swapping modded files with the original ones.
 
 __Platform:__ Windows
 
@@ -70,6 +70,14 @@ This is a bit of a lengthy process as each individual file you alter/add needs t
   From the main mod manager window, go to *Mod Packages* -> *Make .TNT Archive From .JSON Manifest* and browse for the manifest file you've created earlier. It will now create your .TNT archive in the folder above your mod folder. **Congratulations on creating your packaged mod!**
 
 #Changelog
+
+###v0.6 - Last of the summer
+  + The profile creation form will now have default values for paths so creating a new profile can take as few as 2 clicks
+  + Drag'n'drop support extended to the profile creation form. You can now drag'n'drop files and folders in the textboxes to automatically fill them with the file/folder's path
+  + Extra input validation during profile creation
+  + Menu highlight colors now changed so that the text is easier to read
+  + Most file and folder browser dialogs should have titles and/or descriptions now
+  + Added scrollbars to some widgets
 
 ###v0.5 - Like v0.4, but better
   + Newly created profiles will now be automatically loaded
