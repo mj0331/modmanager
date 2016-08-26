@@ -55,9 +55,9 @@
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(12, 13);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(67, 13);
+			this.label1.Size = new System.Drawing.Size(38, 13);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "Game name:";
+			this.label1.Text = "Name:";
 			// 
 			// name_input
 			// 
@@ -87,19 +87,25 @@
 			// 
 			// game_input
 			// 
+			this.game_input.AllowDrop = true;
 			this.game_input.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.game_input.Location = new System.Drawing.Point(124, 43);
 			this.game_input.Name = "game_input";
 			this.game_input.Size = new System.Drawing.Size(350, 20);
 			this.game_input.TabIndex = 5;
+			this.game_input.DragDrop += new System.Windows.Forms.DragEventHandler(this.game_input_DragDrop);
+			this.game_input.DragEnter += new System.Windows.Forms.DragEventHandler(this.game_input_DragEnter);
 			// 
 			// backup_input
 			// 
+			this.backup_input.AllowDrop = true;
 			this.backup_input.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.backup_input.Location = new System.Drawing.Point(124, 105);
 			this.backup_input.Name = "backup_input";
 			this.backup_input.Size = new System.Drawing.Size(350, 20);
 			this.backup_input.TabIndex = 6;
+			this.backup_input.DragDrop += new System.Windows.Forms.DragEventHandler(this.game_input_DragDrop);
+			this.backup_input.DragEnter += new System.Windows.Forms.DragEventHandler(this.game_input_DragEnter);
 			// 
 			// game_browse
 			// 
@@ -132,9 +138,9 @@
 			this.create_profile_confirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.create_profile_confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.create_profile_confirm.ForeColor = System.Drawing.SystemColors.ButtonFace;
-			this.create_profile_confirm.Location = new System.Drawing.Point(15, 177);
+			this.create_profile_confirm.Location = new System.Drawing.Point(12, 163);
 			this.create_profile_confirm.Name = "create_profile_confirm";
-			this.create_profile_confirm.Size = new System.Drawing.Size(557, 57);
+			this.create_profile_confirm.Size = new System.Drawing.Size(560, 57);
 			this.create_profile_confirm.TabIndex = 9;
 			this.create_profile_confirm.Text = "Create profile";
 			this.create_profile_confirm.UseVisualStyleBackColor = true;
@@ -151,10 +157,13 @@
 			// 
 			// profile_input
 			// 
+			this.profile_input.AllowDrop = true;
 			this.profile_input.Location = new System.Drawing.Point(124, 136);
 			this.profile_input.Name = "profile_input";
 			this.profile_input.Size = new System.Drawing.Size(350, 20);
 			this.profile_input.TabIndex = 11;
+			this.profile_input.DragDrop += new System.Windows.Forms.DragEventHandler(this.game_input_DragDrop);
+			this.profile_input.DragEnter += new System.Windows.Forms.DragEventHandler(this.game_input_DragEnter);
 			// 
 			// profile_browse
 			// 
@@ -184,11 +193,14 @@
 			// 
 			// mod_input
 			// 
+			this.mod_input.AllowDrop = true;
 			this.mod_input.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.mod_input.Location = new System.Drawing.Point(124, 74);
 			this.mod_input.Name = "mod_input";
 			this.mod_input.Size = new System.Drawing.Size(350, 20);
 			this.mod_input.TabIndex = 14;
+			this.mod_input.DragDrop += new System.Windows.Forms.DragEventHandler(this.game_input_DragDrop);
+			this.mod_input.DragEnter += new System.Windows.Forms.DragEventHandler(this.game_input_DragEnter);
 			// 
 			// label5
 			// 
@@ -208,7 +220,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.ClientSize = new System.Drawing.Size(584, 261);
+			this.ClientSize = new System.Drawing.Size(584, 230);
 			this.Controls.Add(this.mod_browse);
 			this.Controls.Add(this.mod_input);
 			this.Controls.Add(this.label5);

@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
+using Microsoft.Win32;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace modmanager
 {
@@ -16,10 +10,46 @@ namespace modmanager
 	{
 		public Profile CreatedProfile;
 		public string CreatedProfilePath;
+		public string SteamPath;
+		public string DefaultGamePath;
+		public string DefaultModPath;
+		public string DefaultBackupPath;
+		public string DefaultProfilePath;
 
 		public CreateProfileForm()
 		{
 			InitializeComponent();
+
+			//Try and get the Steam install path from registry
+			SteamPath = Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Valve\\Steam", "SteamExe", null).ToString();
+
+			if(SteamPath == null)
+			{
+				DialogResult = DialogResult.No;
+				return;
+			}
+
+			SteamPath = Utils.Capitalize(Path.GetDirectoryName(SteamPath));
+
+			//Default the .exe path to the TnT exe in steamapps
+			DefaultGamePath = Path.Combine(SteamPath, "steamapps\\common\\ToothAndTail\\ToothAndTail.exe");
+			DefaultModPath = Path.Combine(SteamPath, "steamapps\\common\\TnTModManagerFiles\\mods");
+			DefaultBackupPath = Path.Combine(SteamPath, "steamapps\\common\\TnTModManagerFiles\\backup");
+			DefaultProfilePath = Path.Combine(SteamPath, "steamapps\\common\\TnTModManagerFiles");
+
+			if (!Directory.Exists(Path.Combine(SteamPath, "steamapps\\common\\TnTModManagerFiles")))
+			{
+				Directory.CreateDirectory(DefaultProfilePath);
+				Directory.CreateDirectory(DefaultBackupPath);
+				Directory.CreateDirectory(DefaultModPath);
+			}
+
+			name_input.Text = "Tooth And Tail - Default";
+			game_input.Text = DefaultGamePath;
+			backup_input.Text = DefaultBackupPath;
+			mod_input.Text = DefaultModPath;
+			profile_input.Text = DefaultProfilePath;
+
 			CreatedProfile = new Profile();
 		}
 
@@ -56,7 +86,11 @@ namespace modmanager
 				game_input.TextLength > 0 &&
 				mod_input.TextLength > 0 &&
 				backup_input.TextLength > 0 &&
-				profile_input.TextLength > 0)
+				profile_input.TextLength > 0 &&
+				File.Exists(game_input.Text) &&
+				Directory.Exists(mod_input.Text) &&
+				Directory.Exists(backup_input.Text) &&
+				Directory.Exists(profile_input.Text))
 			{
 				return true;
 			}
@@ -92,7 +126,7 @@ namespace modmanager
 			}
 			else
 			{
-				MessageBox.Show("Cannot create profile! One ore more fields are empty!", "Error");
+				MessageBox.Show("Cannot create profile! One ore more fields are empty or one of the paths is not valid!", "Error");
 			}
 		}
 
@@ -101,6 +135,23 @@ namespace modmanager
 			if(folderBrowserDialog4.ShowDialog() == DialogResult.OK)
 			{
 				mod_input.Text = folderBrowserDialog4.SelectedPath;
+			}
+		}
+
+		private void game_input_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+		private void game_input_DragDrop(object sender, DragEventArgs e)
+		{
+			string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if (files != null)
+			{
+				(sender as TextBox).Text = files[0];
 			}
 		}
 	}

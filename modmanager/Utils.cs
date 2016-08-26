@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
+using System.Globalization;
 
 namespace modmanager
 {
 	class Utils
 	{
+		public static string Capitalize(string s)
+		{
+			return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
+		}
+
 		public static string GetRelativePath(string full_path, string root)
 		{
 			//Make sure the root exists in the given path
