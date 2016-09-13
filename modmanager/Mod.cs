@@ -15,7 +15,8 @@ namespace modmanager
 		public enum Type
 		{
 			Replacement = 0,
-			Addition
+			Addition,
+			DirCopy
 		}
 
 		public Mod(string target, string modded)
@@ -55,6 +56,9 @@ namespace modmanager
 				case Type.Addition:
 					AdditionInstall(p, pack);
 					break;
+				case Type.DirCopy:
+					CopyDirInstall(p, pack);
+					break;
 				default:
 					MessageBox.Show("Unknown mod procedure code: " + ModType);
 					break;
@@ -71,6 +75,9 @@ namespace modmanager
 					break;
 				case Type.Addition:
 					AdditionUninstall(p, pack);
+					break;
+				case Type.DirCopy:
+					CopyDirUninstall(p, pack);
 					break;
 				default:
 					MessageBox.Show("Unknown mod procedure code: " + ModType);
@@ -109,7 +116,6 @@ namespace modmanager
 			}
 		}
 
-		//N.B.: As of now, this is the same as ReplaceInstall, but the install logic may change in the future, so this stays
 		void AdditionInstall(Profile p, ModPackage pack)
 		{
 			string target_dir = Path.Combine(p.GamePath, TargetFile);
@@ -142,6 +148,40 @@ namespace modmanager
 			catch(Exception e)
 			{
 				MessageBox.Show("Error deleting modded file from the game files!\n\nFROM:" + target + "\n\n" + e.Message);
+			}
+		}
+
+		void CopyDirInstall(Profile p, ModPackage pack)
+		{
+			string target = Path.Combine(p.GamePath, TargetFile);
+			string mod = Path.Combine(p.ModPath, pack.Name, ModdedFile);
+			string backup = Path.Combine(p.BackupRoot, BackupFile);
+
+			try
+			{
+				Utils.DirectoryCopy(target, backup, true);
+				Utils.DirectoryCopy(mod, target, true);
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Error copying mod dir to target location!\n\n" + e.Message);
+			}
+		}
+
+		void CopyDirUninstall(Profile p, ModPackage pack)
+		{
+			string target = Path.Combine(p.GamePath, TargetFile);
+			string mod = Path.Combine(p.ModPath, pack.Name);
+			string backup = Path.Combine(p.BackupRoot, BackupFile);
+
+			try
+			{
+				Utils.DirectoryDelete(target);
+				Utils.DirectoryCopy(backup, target, true);
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Error copying backup dir to target location!\n\n" + e.Message);
 			}
 		}
 	}
