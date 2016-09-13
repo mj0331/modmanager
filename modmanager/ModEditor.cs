@@ -77,6 +77,7 @@ namespace modmanager
 			switch(comboBox1.SelectedItem.ToString())
 			{
 				case "Replacement":
+				{
 					ActiveMod.ModType = Mod.Type.Replacement;
 					string filename = Path.GetFileName(target_path.Text);
 					if (!File.Exists(filename) && Directory.Exists(Path.Combine(Form1.ActiveProfile.GamePath, target_path.Text)))
@@ -86,17 +87,32 @@ namespace modmanager
 					}
 
 					break;
+				}
+					
 				case "Addition":
+				{
 					ActiveMod.ModType = Mod.Type.Addition;
 					string target_file_path = Path.Combine(Form1.ActiveProfile.GamePath, target_path.Text);
 					string ext = Path.GetExtension(target_file_path);
 
-					if	(ext != string.Empty )
+					if (ext != string.Empty)
 					{
 						ActiveMod.TargetFile = Utils.GetLastDirectory(ActiveMod.TargetFile);
 						target_path.Text = ActiveMod.TargetFile;
 					}
 					break;
+				}
+				case "DirCopy":
+				{
+					ActiveMod.ModType = Mod.Type.DirCopy;
+					string dirname = Path.GetDirectoryName(target_path.Text);
+					if (!File.Exists(dirname) && Directory.Exists(Path.Combine(Form1.ActiveProfile.GamePath, target_path.Text)))
+					{
+						ActiveMod.TargetFile = Utils.GetRelativePath(target_path.Text, Form1.ActiveProfile.GamePath);
+						target_path.Text = ActiveMod.TargetFile;
+					}
+					break;
+				}
 				default:
 					break;
 			}
