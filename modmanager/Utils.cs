@@ -15,7 +15,10 @@ namespace modmanager
 		public static string GetRelativePath(string full_path, string root)
 		{
 			//Make sure the root exists in the given path
-			int start_index = full_path.IndexOf(root);
+			string lw_full_path = full_path.ToLower();
+			string lw_root = root.ToLower();
+
+			int start_index = lw_full_path.IndexOf(lw_root);
 
 			if(start_index >= 0)
 			{
@@ -70,7 +73,7 @@ namespace modmanager
 		}
 
 
-		private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+		public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
 		{
 			// Get the subdirectories for the specified directory.
 			DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -94,7 +97,7 @@ namespace modmanager
 			foreach (FileInfo file in files)
 			{
 				string temppath = Path.Combine(destDirName, file.Name);
-				file.CopyTo(temppath, false);
+				file.CopyTo(temppath, true);
 			}
 
 			// If copying subdirectories, copy them and their contents to new location.
@@ -105,6 +108,34 @@ namespace modmanager
 					string temppath = Path.Combine(destDirName, subdir.Name);
 					DirectoryCopy(subdir.FullName, temppath, copySubDirs);
 				}
+			}
+		}
+
+		public static void DirectoryDelete(string dirName)
+		{
+			// Get the subdirectories for the specified directory.
+			DirectoryInfo dir = new DirectoryInfo(dirName);
+
+			if (!dir.Exists)
+			{
+				throw new DirectoryNotFoundException(
+					"Source directory does not exist or could not be found: "
+					+ dirName);
+			}
+
+			DirectoryInfo[] dirs = dir.GetDirectories();
+
+			// Get the files in the directory and copy them to the new location.
+			FileInfo[] files = dir.GetFiles();
+			foreach (FileInfo file in files)
+			{
+				File.Delete(file.FullName);
+			}
+
+			// If copying subdirectories, copy them and their contents to new location.
+			foreach (DirectoryInfo subdir in dirs)
+			{
+				DirectoryDelete(subdir.FullName);
 			}
 		}
 
