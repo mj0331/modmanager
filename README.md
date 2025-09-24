@@ -6,7 +6,7 @@ __Platform:__ Windows
 __Requires:__ .NET Framework v4.6
 
 # Creating a profile
-There isn't much you can do with the mod manager without a profile loaded. The profile contains info the mod manager needs in order to install an uninstall mods. In order to create a profile click *Profile* -> *Create new profile*. A window will pop up with the following fields.
+There is not much you can do with the mod manager without a profile loaded. The profile contains info the mod manager needs in order to install an uninstall mods. In order to create a profile click *Profile* -> *Create new profile*. A window will pop up with the following fields.
 
 + __Game name__:
 The name of the game for which the profile will be used.
